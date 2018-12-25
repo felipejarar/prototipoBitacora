@@ -10,6 +10,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { GlobalProvider } from '../test/globalprovider';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    ComponentsModule,
+    IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -34,6 +37,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
+    GlobalProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

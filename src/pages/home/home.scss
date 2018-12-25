@@ -1,3 +1,71 @@
 page-home {
 
+  .colored-content{
+    background-color: rgb(241,241,241);
+  }
+
+  .colored-button {
+    color: #747474;
+  }
+
+  .swiper-pagination {
+      padding: 3px;
+      bottom: 0px !important;
+      background-color: rgba(72,138,255,0.75);
+      .swiper-pagination-bullet {
+        background: #FFF;
+        margin: 0 3px;
+      }
+    }
+
+
+
+    .no-padding {
+        padding: 0px !important;
+    }
+
+
+    .no-margin-sides{
+      margin-left: 0px !important;
+      margin-right: 0px !important;
+    }
+
+    .full-width-card{
+      margin-left: 0px !important;
+      margin-right: 0px !important;
+      width: 100%;
+      box-shadow: none;
+    }
+
+    .full-width{
+      width: 100%;
+    }
+
+    ion-card ion-card-content ion-row.bitacora-header{
+      padding: 0px !important;
+      ion-col{
+        padding: 0px !important;
+      }
+      ion-note.bitacora-date{
+        padding: 0px !important;
+        ion-icon{
+          padding-right: 5px;
+        }
+      }
+      button.bitacora-button{
+        margin-top: 0px;
+        top: -4px;
+        width: 100%;
+      }
+    }
+
+
+
+
+    .bitacora-title{
+      font-size: 2rem;
+      font-weight: bold;
+      padding: 0px;
+      margin: 0px;
+    }
 }
