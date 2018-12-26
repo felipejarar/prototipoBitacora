@@ -1,0 +1,125 @@
+<!--
+  Generated template for the BitacoraPersonalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header no-border >
+
+  <!-- First Toolbar -->
+  <ion-navbar>
+    <ion-title text-uppercase>Bitácora</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-card *ngFor="let entrada of entradas; let i=index" class="full-width-card">
+
+    <ion-card-content>
+
+      <ion-row class="post-header">
+        <ion-col col-11>
+          <ion-note class="post-date">
+            {{entrada.created_at}}
+          </ion-note>
+        </ion-col>
+        <ion-col col-1>
+          <button class="post-options" ion-button icon-only clear small round color="dark" (click)="openPostActions()">
+              <ion-icon name="md-more"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+
+
+    <div *ngIf="entrada.pics != null" name="picture-grids">
+
+      <div *ngIf="entrada.pics.length == 1">
+        <div class="grid-image-one">
+          <div class="grid-image">
+            <img [src]="entrada.pics[0].src"/>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="entrada.pics.length == 2">
+        <div class="grid-image-two">
+          <div class="grid-image">
+            <img [src]="entrada.pics[0].src"/>
+          </div>
+          <div class="grid-image">
+            <img [src]="entrada.pics[1].src"/>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="entrada.pics.length == 3">
+        <div class="grid-image-three">
+          <div class="grid-image">
+            <img [src]="entrada.pics[0].src"/>
+          </div>
+          <div class="grid-image">
+            <img [src]="entrada.pics[1].src"/>
+          </div>
+          <div class="grid-image">
+            <img [src]="entrada.pics[2].src"/>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="entrada.pics.length == 4">
+        <div class="grid-image-four-or-more">
+          <div class="grid-image">
+            <img [src]="entrada.pics[0].src"/>
+          </div>
+          <div class="grid-image">
+            <img [src]="entrada.pics[1].src"/>
+          </div>
+          <div class="grid-image">
+            <img [src]="entrada.pics[2].src"/>
+          </div>
+          <div class="grid-image">
+            <img [src]="entrada.pics[3].src"/>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="entrada.pics.length > 4">
+        <div class="grid-image-four-or-more">
+          <div class="grid-image">
+            <img [src]="entrada.pics[0].src"/>
+          </div>
+          <div class="grid-image">
+            <img [src]="entrada.pics[1].src"/>
+          </div>
+          <div class="grid-image">
+            <img [src]="entrada.pics[2].src"/>
+          </div>
+          <div class="grid-image" style="text-align: center; position: relative;">
+            <img [src]="entrada.pics[3].src"/>
+            <div style="position:absolute; width: 100%; height: 100%; top: 0; background-color: black; opacity: 0.75;"></div>
+            <div style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%)">
+
+              <h1 style="color: white;"><ion-icon style="padding-right: 5px" name="md-add"></ion-icon> {{ entrada.pics.length - 3 }}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+    <ion-card-content>
+      <p>
+        {{entrada.body}}
+      </p>
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>

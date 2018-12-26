@@ -14,3 +14,32 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+ion-card.full-width-card{
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  width: 100% !important;
+  box-shadow: none;
+}
+
+ion-card ion-card-content ion-row.post-header{
+  padding: 0px !important;
+  ion-col{
+    padding: 0px !important;
+  }
+  ion-note.post-date{
+    padding: 0px !important;
+    ion-icon{
+      padding-right: 5px;
+    }
+  }
+  button.post-options{
+    margin-top: 0px;
+    top: -4px;
+    width: 100%;
+  }
+}
+
+ion-content{
+  background-color: rgb(241,241,241) !important;
+}

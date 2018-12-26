@@ -7,6 +7,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { BitacoraPersonalPage } from "../pages/bitacora-personal/bitacora-personal";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -23,7 +24,8 @@ import { DataBitacorasPersonales } from '../prototype_data/data_bitacoras_person
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    BitacoraPersonalPage
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { DataBitacorasPersonales } from '../prototype_data/data_bitacoras_person
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    BitacoraPersonalPage
   ],
   providers: [
     StatusBar,
