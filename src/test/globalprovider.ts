@@ -9,9 +9,7 @@ export class GlobalProvider{
     entries: [
       {
         title: "Lorem Ipsum First",
-        pics: [
-          "assets/prototype/img1.png",
-          "assets/prototype/img2.png"
+        pics: ["assets/prototype/img1.png", "assets/prototype/img2.png"
         ]
       },
       {
@@ -35,34 +33,68 @@ export class GlobalProvider{
         title: "Lorem Ipsum Five"
       }
     ],
-    start_date: "14 de Octubre, 2018",
-    end_date: "25 de Octubre, 2018"
+    start_date: "14 Octubre, 2018",
+    end_date: "25 Octubre, 2018"
   },
 
   ];
 
+  /** Bitacoras compartidas:
+  title: titulo de la bitácora (obligatorio)
+  entries: entradas reallizadas por el usuario de la aplicación
+      > title: Titulo de una experiencia de viaje (opcional)
+      > description: Descripción de una experiencia de viaje
+      > pics: Fotografías realizadas por el usuario sobre la experiencia de Viaje
+      > external_pics: Fotografías realizadas por otros usuariso sobre la experiencia de Viaje
+            >> pics: Fotografías
+            >> author: Nombre del usuario que subio la fotografía
+      > videos: Videos realizados por el usuario sobre la experiencia de viaje
+
+  external_entries: experiencias de viaje realizadas por otros usuarios en una bitácora compartida
+      > title: Titulo de una experiencia de viaje (opcional)
+      > description: Descripción de una experiencia de viaje
+      > pics: Fotografías realizadas por el usuario sobre la experiencia de Viaje
+      > external_pics: Fotografías realizadas por otros usuariso sobre la experiencia de Viaje
+            >> pics: Fotografías
+            >> author: Nombre del usuario que subio la fotografía
+
+  **/
   _bitacoras_compartidas: any = [
-    {
-      title : "Viaje con mis amigos",
-      entries: [{
-          title: "Lorem Ipsum First"
-        },{
-          title: "Lorem Ipsum Second"
+    { // Bitácora compartida con permisos colaborativos
+      title : "Viaje con mis amigos a Santiago",
+
+      entries:
+      [
+        {
+          title: "Fantasilandia",
+          description: "Fui con mis amigos a fantasilandia un día de semana de gran calor en Santiago, puedo decir que lo pasamos muy bien ,nos subimos a muchos juegos ,yo me desestrese gritando y riendo ,nos refrescabamos en los puntos con agua ,hay que tener en cuenta que mochilas y bolsos no se pueden subir a muchos juegos ,pero hay casilleros para guardarlos ,los juegos son muy seguros y modernos, no hay peligro sólo diversión total",
+          pics: [ "assets/prototype/img10.png"],
+          external_pics:
+          [
+            {
+              pics: [ "assets/prototype/img11.png", "assets/prototype/img12.png", "assets/prototype/img13.png"],
+              author: "John Doe"
+            }
+          ]
         }
       ],
-      external_entries: [{
-        title: "Lorem Ipsum Third",
-        author: "John Doe"
+
+      external_entries:
+      [
+        {
+          author: "John Doe",
+          pics: ["assets/prototype/img10.png"]
       },{
         title: "Lorem Ipsum Fourth",
         author: "Stacy Chad"
       }],
-      start_date: "10 de Septiembre, 2018",
-      end_date: "30 de Septiembre, 2018",
+      start_date: "10 Septiembre, 2018",
+      end_date: "30 Septiembre, 2018",
       permission: "colaborative"
     },
-    {
-      title : "Viaje con mis amigos",
+
+    { // Bitácora compartida con permisos de visualización
+      title : "El viaje de mi amigo",
       entries: [{
           title: "Lorem Ipsum First"
         },{
@@ -76,8 +108,8 @@ export class GlobalProvider{
         title: "Lorem Ipsum Fourth",
         author: "Farbinger Salame"
       }],
-      start_date: "3 de Septiembre, 2018",
-      end_date: "7 de Septiembre, 2018",
+      start_date: "3 Septiembre, 2018",
+      end_date: "7 Septiembre, 2018",
       permission: "read-only"
     },
   ]

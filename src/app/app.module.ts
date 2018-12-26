@@ -13,6 +13,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { GlobalProvider } from '../test/globalprovider';
 import { ComponentsModule } from '../components/components.module';
 
+import { DataBitacorasPersonales } from '../prototype_data/data_bitacoras_personales';
+
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -38,6 +42,7 @@ import { ComponentsModule } from '../components/components.module';
     StatusBar,
     SplashScreen,
     GlobalProvider,
+    DataBitacorasPersonales,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
