@@ -1,0 +1,61 @@
+<!-- Generated template for the NewTabComponent component -->
+
+  <ion-header no-border>
+    <ion-navbar transparent>
+      <ion-title>
+         Nueva experiencia de viaje
+     </ion-title>
+
+   <ion-buttons end>
+     <button ion-button icon-only (click)="dismiss()">
+       <ion-icon name="md-close"></ion-icon>
+     </button>
+   </ion-buttons>
+
+    </ion-navbar>
+  </ion-header>
+
+  <ion-content center text-center class="card-background-page" >
+
+    <ion-card class="customheight" (click)="changePage('texto')">
+      <div class="card-title">
+          <ion-row>
+            <ion-col col-5>
+              <h1><ion-icon name="ios-clipboard"></ion-icon></h1>
+            </ion-col>
+            <ion-col>
+              <h1>Texto</h1>
+            </ion-col>
+          </ion-row>
+      </div>
+    </ion-card>
+
+      <ion-card class="customheight">
+        <div class="card-title">
+            <ion-row>
+              <ion-col col-5>
+                <h1><ion-icon name="camera"></ion-icon></h1>
+              </ion-col>
+              <ion-col>
+                <h1>Fotografías</h1>
+              </ion-col>
+            </ion-row>
+        </div>
+      </ion-card>
+
+      <ion-card class="customheight">
+          <div class="card-title">
+              <ion-row>
+                <ion-col col-5>
+                  <h1><ion-icon name="md-videocam"></ion-icon></h1>
+                </ion-col>
+                <ion-col>
+                  <h1>Video</h1>
+                </ion-col>
+              </ion-row>
+          </div>
+      </ion-card>
+
+
+
+  </ion-content>

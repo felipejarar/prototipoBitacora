@@ -20,6 +20,10 @@ ion-card.full-width-card{
   margin-right: 0px !important;
   width: 100% !important;
   box-shadow: none;
+  .post-title{
+    margin: 0px;
+    padding: 0px;
+  }
 }
 
 ion-card ion-card-content ion-row.post-header{
@@ -38,6 +42,7 @@ ion-card ion-card-content ion-row.post-header{
     top: -4px;
     width: 100%;
   }
+
 }
 
 ion-content{

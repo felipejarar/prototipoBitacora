@@ -1,0 +1,29 @@
+<ion-header>
+
+  <ion-navbar transparent>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <ion-icon style="color:white" name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content style="background-color: rgba(0,0,0,0.96) !important;" >
+
+  <ion-slides>
+    <ion-slide >
+      <div class="swiper-zoom-container">
+        <img [src]='text'/>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <h1>Slide 2</h1>
+    </ion-slide>
+    <ion-slide>
+      <h1>Slide 3</h1>
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>

@@ -1,5 +1,14 @@
 <ion-tabs>
   <ion-tab [root]="tab1Root" tabTitle="Principal" tabIcon="home"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="Foros" tabIcon="contacts"></ion-tab>
+  <ion-tab></ion-tab>
   <ion-tab [root]="tab2Root" tabTitle="About" tabIcon="information-circle"></ion-tab>
-  <ion-tab [root]="tab3Root" tabTitle="Contact" tabIcon="contacts"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="Mensajes" tabIcon="chatboxes"></ion-tab>
 </ion-tabs>
+
+<ion-fab center bottom>
+  <button ion-fab outline color="primary"
+    (click)="openNewModel()">
+    <ion-icon name="add"></ion-icon>
+  </button>
+</ion-fab>

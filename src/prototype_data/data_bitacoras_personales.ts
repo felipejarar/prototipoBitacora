@@ -122,6 +122,12 @@ export class DataBitacorasPersonales {
 
   getBitacoras(){ return this._bitacoras_personales; }
 
+  getBitacoraNames(){
+    for (let bitacora of this._bitacoras_personales){
+      
+    }
+  }
+
   getBitacora(id){
     for (let bitacora of this._bitacoras_personales){
       if (bitacora.id != null && bitacora.id == id ){

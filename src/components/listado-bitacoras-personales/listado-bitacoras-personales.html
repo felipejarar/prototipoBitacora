@@ -1,8 +1,20 @@
+<!--
+<button ion-button small color="dark" style="    position: absolute;
+    bottom: 5px
+    right: 25%;
+    left: 25%;
+    width: 50%;
+    border-radius: 20px;
+    z-index: 1000;">
+  Nueva bitácora
+</button>
+-->
+
 <ion-card *ngFor="let bitacora of bitacoras_personales; let i=index" class="full-width-card">
 
     <ion-card-content>
       <ion-row class="post-header">
-        <ion-col col-11>
+        <ion-col col-11 (click)="openBitacora(bitacora.id)">
           <ion-note class="post-date">
             <ion-icon name="md-calendar"></ion-icon>
             <span >{{bitacora.start_date}} / {{bitacora.end_date}} </span>
@@ -17,7 +29,7 @@
 
       </ion-row>
 
-      <ion-card-title class="bitacora-title" (click)="openBitacora(bitacora.id)"> {{bitacora.title }}</ion-card-title>
+      <ion-card-title class="post-title" (click)="openBitacora(bitacora.id)"> {{bitacora.title }}</ion-card-title>
 
     </ion-card-content>
 

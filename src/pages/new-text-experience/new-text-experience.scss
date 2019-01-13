@@ -1,0 +1,36 @@
+page-new-text-experience {
+  ion-navbar ion-buttons button{
+    margin-right: 10px !important;
+    top:2px;
+  }
+
+  ion-content{
+    background-color: white !important;
+  }
+
+  ion-input input,{
+    margin-left: 0px !important;
+  }
+  ion-textarea textarea{
+    margin-left: 0px !important;
+    height: 15em;
+  }
+
+  .transparent-fab{
+    background-color: transparent;
+    color: grey;
+    box-shadow: none;
+    top: -5px;
+  }
+/**
+  ion-content{
+    background-color: #f8f8f8 !important;
+    ion-item{
+      background-color: #f8f8f8 !important;
+    }
+    button ion-item{
+      background-color: #f8f8f8 !important;
+    }
+  }
+  **/
+}

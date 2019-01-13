@@ -1,0 +1,57 @@
+<!--
+  Generated template for the NewTextExperiencePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header no-border>
+  <ion-navbar no-border>
+    <ion-title>Experiencia de texto</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="publish()">
+        CREAR
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+
+  <ion-list>
+
+     <button ion-item>
+        <ion-icon name="ios-bookmarks" item-start color="primary"></ion-icon>
+         <ion-label color="primary" stacked>Seleccionar bitácora de viaje</ion-label>
+         <ion-select [(ngModel)]="toppings">
+           <ion-option disabled>Toppings</ion-option>
+           <ion-option>Bacon</ion-option>
+           <ion-option>Black Olives</ion-option>
+           <ion-option>Extra Cheese</ion-option>
+           <ion-option>Mushrooms</ion-option>
+           <ion-option>Pepperoni</ion-option>
+           <ion-option disabled>AA</ion-option>
+           <ion-option>Sausage</ion-option>
+         </ion-select>
+       </button>
+
+       <ion-item>
+         <ion-label>Fecha experiencia</ion-label>
+         <ion-datetime displayFormat="DDDD DD MMM, YYYY" [(ngModel)]="myDate"></ion-datetime>
+       </ion-item>
+
+       <ion-item>
+         <ion-input placeholder="Ingrese un título interesante (opcional)" (ionFocus)="titleFocus()" [(ngModel)]='title'></ion-input>
+       </ion-item>
+
+       <ion-fab right *ngIf="showHelp">
+         <button ion-fab mini class="transparent-fab">
+           <ion-icon name="md-help-circle"></ion-icon>
+         </button>
+       </ion-fab>
+
+       <ion-item>
+         <ion-textarea name="text-input" placeholder="Describa su experiencia de viaje" (ionFocus)="descriptionFocus()" (ionChange)="descriptionChanged()" [(ngModel)]='description' ></ion-textarea>
+       </ion-item>
+
+  </ion-list>
+</ion-content>

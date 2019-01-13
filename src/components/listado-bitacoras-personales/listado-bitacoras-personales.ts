@@ -54,18 +54,29 @@ export class ListadoBitacorasPersonalesComponent {
     const actionSheet = this.actionSheetCtrl.create({
      buttons: [
        {
-         text: 'Renombrar',
+         text: 'Editar',
          icon: 'md-create',
          handler: () => {
            notFinishedAlert.present();
-           console.log('Renombrar clicked');
          }
        },
        {
          text: 'Eliminar',
          icon: 'md-trash',
          handler: () => {
-           console.log('Destructive clicked');
+           notFinishedAlert.present();
+         }
+       },{
+         text: 'Compartir en Facebook',
+         icon: 'logo-facebook',
+         handler: () => {
+           notFinishedAlert.present();
+         }
+       },{
+         text: "Exportar como revista digital",
+         icon: "document",
+         handler: () => {
+           notFinishedAlert.present();
          }
        }
      ]

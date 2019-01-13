@@ -11,7 +11,23 @@
     <ion-title text-uppercase>Bitácora</ion-title>
   </ion-navbar>
 
+  <ion-toolbar>
+    <ion-segment color="primary" [(ngModel)]="tabs">
+      <ion-segment-button value="general">
+        General
+      </ion-segment-button>
+      <ion-segment-button value="multimedia">
+        Multimedia
+      </ion-segment-button>
+      <ion-segment-button value="route">
+        Ruta
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
 </ion-header>
+
+
 
 <ion-content>
 
@@ -33,24 +49,27 @@
       </ion-row>
     </ion-card-content>
 
+    <button ion-button full (click)=openModal(i)>Abrete sésamo</button>
 
     <div *ngIf="entrada.pics != null" name="picture-grids">
+
 
       <div *ngIf="entrada.pics.length == 1">
         <div class="grid-image-one">
           <div class="grid-image">
-            <img [src]="entrada.pics[0].src"/>
+            <img [src]="entrada.pics[0].src" imageViewer={{entrada.pics[0].src}}/>
           </div>
         </div>
       </div>
 
       <div *ngIf="entrada.pics.length == 2">
+
         <div class="grid-image-two">
           <div class="grid-image">
-            <img [src]="entrada.pics[0].src"/>
+            <img [src]="entrada.pics[0].src"  imageViewer={{mypics[i]}}/>
           </div>
           <div class="grid-image">
-            <img [src]="entrada.pics[1].src"/>
+            <img [src]="entrada.pics[1].src"   imageViewer="[entrada.pics[0].src, entrada.pics[1].src]"/>
           </div>
         </div>
       </div>
