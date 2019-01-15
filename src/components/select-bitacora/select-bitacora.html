@@ -1,0 +1,54 @@
+<!-- Generated template for the SelectBitacoraComponent component -->
+<ion-header no-border>
+  <ion-navbar>
+
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">Cerrar</button>
+    </ion-buttons>
+
+    <ion-title>
+       Seleccionar bitácora
+    </ion-title>
+
+
+
+  </ion-navbar>
+
+  <!--
+  <ion-toolbar no-border-top>
+    <ion-searchbar placeholder="Filtrar por nombre" [(ngModel)]='search_text' (ionInput)="filterItems($event)"></ion-searchbar>
+  </ion-toolbar>
+  -->
+</ion-header>
+
+<ion-content center text-center>
+
+  <!--
+  <ion-searchbar placeholder="Filtrar por nombre" [(ngModel)]='search_text' (ionInput)="filterItems($event)"></ion-searchbar>
+  -->
+  <ion-list radio-group [(ngModel)]="selected_bitacora" (ionChange)="onSelectionChange();">
+
+    <ion-list-header item-start *ngIf="bitacoras_personales != null">
+      Bitácoras personales
+
+      <button ion-button small outline style="right: 3px; position: absolute; top: 7px; font-size: x-small;">Nuevo</button>
+
+    </ion-list-header>
+
+    <ion-item *ngFor="let bitacora of bitacoras_personales; let i=index">
+      <ion-label color="dark">{{bitacora.title}}</ion-label>
+      <ion-radio value="{{'personal ' + bitacora.id.toString()}}"></ion-radio>
+    </ion-item>
+
+    <ion-list-header *ngIf="bitacoras_compartidas != null">
+      Bitácoras compartidas
+    </ion-list-header>
+
+    <ion-item *ngFor="let bitacora of bitacoras_compartidas; let i=index">
+      <ion-label color="dark">{{bitacora.title}}</ion-label>
+      <ion-radio value="{{'compartida ' + bitacora.id.toString()}}"></ion-radio>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

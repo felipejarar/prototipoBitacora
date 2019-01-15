@@ -16,8 +16,7 @@
       <ion-row class="post-header">
         <ion-col col-11 (click)="openBitacora(bitacora.id)">
           <ion-note class="post-date">
-            <ion-icon name="md-calendar"></ion-icon>
-            <span >{{bitacora.start_date}} / {{bitacora.end_date}} </span>
+            <span>{{bitacora.start_date}}</span><span *ngIf="bitacora.end_date != null"> / {{bitacora.end_date}} </span>
           </ion-note>
         </ion-col>
 
@@ -29,21 +28,24 @@
 
       </ion-row>
 
-      <ion-card-title class="post-title" (click)="openBitacora(bitacora.id)"> {{bitacora.title }}</ion-card-title>
+      <ion-card-title class="post-title" (click)="openBitacora(bitacora.id)">{{bitacora.title}}</ion-card-title>
 
     </ion-card-content>
 
-    <ion-slides *ngIf="bitacoras_personales_pics[i].length > 1" pager="true" effect="fade">
-      <ion-slide *ngFor="let pic of bitacoras_personales_pics[i]">
-        <img [src]="pic"/>
-      </ion-slide>
-    </ion-slides>
 
-    <ion-slides *ngIf="bitacoras_personales_pics[i].length == 1" pager="false" effect="fade">
-      <ion-slide>
-        <img [src]="bitacoras_personales_pics[i]"/>
-      </ion-slide>
-    </ion-slides>
+      <ion-slides *ngIf="bitacoras_personales_pics[i].length > 1" pager="true" effect="fade">
+        <ion-slide *ngFor="let pic of bitacoras_personales_pics[i]">
+          <img [src]="pic"/>
+        </ion-slide>
+      </ion-slides>
+
+      <ion-slides *ngIf="bitacoras_personales_pics[i].length == 1" pager="false" effect="fade">
+        <ion-slide>
+          <img [src]="bitacoras_personales_pics[i]"/>
+        </ion-slide>
+      </ion-slides>
+
+
 
     <ion-row>
       <ion-col>

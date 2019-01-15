@@ -33,8 +33,7 @@
 
   <ion-card *ngFor="let entrada of entradas; let i=index" class="full-width-card">
 
-    <ion-card-content>
-
+    <ion-card-content class="no-padding-bottom">
       <ion-row class="post-header">
         <ion-col col-11>
           <ion-note class="post-date">
@@ -49,15 +48,23 @@
       </ion-row>
     </ion-card-content>
 
-    <button ion-button full (click)=openModal(i)>Abrete sésamo</button>
+    <ion-card-content class="no-padding-top">
+      <h1 *ngIf="entrada.title != null">{{entrada.title}}</h1>
+    </ion-card-content>
 
-    <div *ngIf="entrada.pics != null" name="picture-grids">
 
+    <ion-card-content *ngIf="entrada.video != null" overflow-scroll="true">
+      <video controls="controls" preload="metadata" webkit-playsinline="webkit-playsinline" width="100%">
+       <source src="{{entrada.video}}" type="video/mp4" />
+      </video>
+    </ion-card-content>
+
+    <ion-card-content *ngIf="entrada.pics != null" name="picture-grids">
 
       <div *ngIf="entrada.pics.length == 1">
         <div class="grid-image-one">
           <div class="grid-image">
-            <img [src]="entrada.pics[0].src" imageViewer={{entrada.pics[0].src}}/>
+            <img [src]="entrada.pics[0].src" (click)=openModal(entrada.pics,0) />
           </div>
         </div>
       </div>
@@ -66,10 +73,10 @@
 
         <div class="grid-image-two">
           <div class="grid-image">
-            <img [src]="entrada.pics[0].src"  imageViewer={{mypics[i]}}/>
+            <img [src]="entrada.pics[0].src"  (click)=openModal(entrada.pics,0) />
           </div>
           <div class="grid-image">
-            <img [src]="entrada.pics[1].src"   imageViewer="[entrada.pics[0].src, entrada.pics[1].src]"/>
+            <img [src]="entrada.pics[1].src"   (click)=openModal(entrada.pics,1) />
           </div>
         </div>
       </div>
@@ -77,45 +84,45 @@
       <div *ngIf="entrada.pics.length == 3">
         <div class="grid-image-three">
           <div class="grid-image">
-            <img [src]="entrada.pics[0].src"/>
+            <img [src]="entrada.pics[0].src" (click)=openModal(entrada.pics,0)/>
           </div>
           <div class="grid-image">
-            <img [src]="entrada.pics[1].src"/>
+            <img [src]="entrada.pics[1].src" (click)=openModal(entrada.pics,1)/>
           </div>
           <div class="grid-image">
-            <img [src]="entrada.pics[2].src"/>
+            <img [src]="entrada.pics[2].src" (click)=openModal(entrada.pics,2)/>
           </div>
         </div>
       </div>
       <div *ngIf="entrada.pics.length == 4">
         <div class="grid-image-four-or-more">
           <div class="grid-image">
-            <img [src]="entrada.pics[0].src"/>
+            <img [src]="entrada.pics[0].src" (click)=openModal(entrada.pics,0)/>
           </div>
           <div class="grid-image">
-            <img [src]="entrada.pics[1].src"/>
+            <img [src]="entrada.pics[1].src" (click)=openModal(entrada.pics,1)/>
           </div>
           <div class="grid-image">
-            <img [src]="entrada.pics[2].src"/>
+            <img [src]="entrada.pics[2].src" (click)=openModal(entrada.pics,2)/>
           </div>
           <div class="grid-image">
-            <img [src]="entrada.pics[3].src"/>
+            <img [src]="entrada.pics[3].src" (click)=openModal(entrada.pics,3)/>
           </div>
         </div>
       </div>
       <div *ngIf="entrada.pics.length > 4">
         <div class="grid-image-four-or-more">
           <div class="grid-image">
-            <img [src]="entrada.pics[0].src"/>
+            <img [src]="entrada.pics[0].src" (click)=openModal(entrada.pics,0)/>
           </div>
           <div class="grid-image">
-            <img [src]="entrada.pics[1].src"/>
+            <img [src]="entrada.pics[1].src" (click)=openModal(entrada.pics,1)/>
           </div>
           <div class="grid-image">
-            <img [src]="entrada.pics[2].src"/>
+            <img [src]="entrada.pics[2].src" (click)=openModal(entrada.pics,2)/>
           </div>
           <div class="grid-image" style="text-align: center; position: relative;">
-            <img [src]="entrada.pics[3].src"/>
+            <img [src]="entrada.pics[3].src" (click)=openModal(entrada.pics,3)/>
             <div style="position:absolute; width: 100%; height: 100%; top: 0; background-color: black; opacity: 0.75;"></div>
             <div style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%)">
 
@@ -124,19 +131,11 @@
           </div>
         </div>
       </div>
-    </div>
+    </ion-card-content>
 
 
-
-
-
-
-
-
-    <ion-card-content>
-      <p>
-        {{entrada.body}}
-      </p>
+    <ion-card-content class="no-padding-top">
+      <p>{{entrada.body}}</p>
     </ion-card-content>
 
   </ion-card>

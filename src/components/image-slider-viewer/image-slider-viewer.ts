@@ -16,9 +16,17 @@ export class ImageSliderViewerComponent {
   text: string;
   myParam: string;
 
+  pics: any;
+  focus: any;
+
   constructor(public viewCtrl: ViewController, params: NavParams) {
-    console.log('UserId', params.get('userId'));
-    console.log('Hello ImageSliderViewerComponent Component');
+
+    this.pics = params.get('data');
+    this.focus = params.get('index');
+
+    console.log('aaa', params.get('data'), this.focus );
+
+
     this.text = 'assets/prototype/img1.png';
   }
 

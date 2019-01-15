@@ -45,11 +45,16 @@ export class BitacoraPersonalPage {
 
   }
 
-  openModal(index){
-    let profileModal = this.modalCtrl.create(ImageSliderViewerComponent, { userId: 8675309 }, {showBackdrop: false});
+  openModal(data, index){
+
+    let profileModal = this.modalCtrl.create(ImageSliderViewerComponent, { data : data, index: index}, {showBackdrop: false});
     profileModal.present();
   }
 
+  openPostActions(){
+    console.log("Lol");
+  }
+  
   zoomImage(imageData){
   /**
     this.file.readAsDataURL(cordova.file.applicationDirectory + "www/", imageData)

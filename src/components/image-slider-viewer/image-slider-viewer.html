@@ -12,17 +12,11 @@
 
 <ion-content style="background-color: rgba(0,0,0,0.96) !important;" >
 
-  <ion-slides>
-    <ion-slide >
+  <ion-slides  initialSlide="{{focus}}">
+    <ion-slide *ngFor="let pic of pics; let i=index">
       <div class="swiper-zoom-container">
-        <img [src]='text'/>
+        <img [src]='pic.src'/>
       </div>
-    </ion-slide>
-    <ion-slide>
-      <h1>Slide 2</h1>
-    </ion-slide>
-    <ion-slide>
-      <h1>Slide 3</h1>
     </ion-slide>
   </ion-slides>
 

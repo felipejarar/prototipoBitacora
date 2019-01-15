@@ -23,10 +23,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { GlobalProvider } from '../test/globalprovider';
 import { ComponentsModule } from '../components/components.module';
 import { IonicImageViewerModule } from 'ionic-img-viewer';
+
 import { DataBitacorasPersonales } from '../prototype_data/data_bitacoras_personales';
+import { DataBitacorasCompartidas } from '../prototype_data/data_bitacoras_compartidas';
+
+
 import { ImageSliderViewerComponent } from '../components/image-slider-viewer/image-slider-viewer';
 import { NewTabComponent } from '../components/new-tab/new-tab';
-
+import { SelectBitacoraComponent } from '../components/select-bitacora/select-bitacora';
 
 
 @NgModule({
@@ -42,7 +46,9 @@ import { NewTabComponent } from '../components/new-tab/new-tab';
   imports: [
     BrowserModule,
     ComponentsModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{
+      monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+    }),
     IonicImageViewerModule,
   ],
   bootstrap: [IonicApp],
@@ -55,13 +61,15 @@ import { NewTabComponent } from '../components/new-tab/new-tab';
     BitacoraPersonalPage,
     NewTextExperiencePage,
     ImageSliderViewerComponent,
-    NewTabComponent
+    NewTabComponent,
+    SelectBitacoraComponent
   ],
   providers: [
     StatusBar,
     SplashScreen,
     GlobalProvider,
     DataBitacorasPersonales,
+    DataBitacorasCompartidas,
     PhotoViewer,
     File,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

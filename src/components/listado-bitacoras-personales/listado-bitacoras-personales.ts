@@ -5,6 +5,8 @@ import { DataBitacorasPersonales } from '../../prototype_data/data_bitacoras_per
 import { NavController } from 'ionic-angular';
 import { BitacoraPersonalPage} from '../../pages/bitacora-personal/bitacora-personal';
 
+
+
 /**
  * Generated class for the ListadoBitacorasPersonalesComponent component.
  *

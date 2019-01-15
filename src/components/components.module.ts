@@ -5,17 +5,20 @@ import { ListadoBitacorasCompartidasComponent } from './listado-bitacoras-compar
 import { ListadoBitacorasSocialesComponent } from './listado-bitacoras-sociales/listado-bitacoras-sociales';
 import { ImageSliderViewerComponent } from './image-slider-viewer/image-slider-viewer';
 import { NewTabComponent } from './new-tab/new-tab';
+import { SelectBitacoraComponent } from './select-bitacora/select-bitacora';
 @NgModule({
 	declarations: [ListadoBitacorasPersonalesComponent,
     ListadoBitacorasCompartidasComponent,
     ListadoBitacorasSocialesComponent,
     ImageSliderViewerComponent,
-    NewTabComponent],
+    NewTabComponent,
+    SelectBitacoraComponent],
 	imports: [IonicModule],
 	exports: [ListadoBitacorasPersonalesComponent,
     ListadoBitacorasCompartidasComponent,
     ListadoBitacorasSocialesComponent,
     ImageSliderViewerComponent,
-    NewTabComponent]
+    NewTabComponent,
+    SelectBitacoraComponent]
 })
 export class ComponentsModule {}

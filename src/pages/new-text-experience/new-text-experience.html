@@ -19,28 +19,20 @@
 
   <ion-list>
 
-     <button ion-item>
+      <button ion-item (click)="selectModal();" style="border-bottom: solid; border-width: thin; border-color: #dedede;">
         <ion-icon name="ios-bookmarks" item-start color="primary"></ion-icon>
          <ion-label color="primary" stacked>Seleccionar bitácora de viaje</ion-label>
-         <ion-select [(ngModel)]="toppings">
-           <ion-option disabled>Toppings</ion-option>
-           <ion-option>Bacon</ion-option>
-           <ion-option>Black Olives</ion-option>
-           <ion-option>Extra Cheese</ion-option>
-           <ion-option>Mushrooms</ion-option>
-           <ion-option>Pepperoni</ion-option>
-           <ion-option disabled>AA</ion-option>
-           <ion-option>Sausage</ion-option>
-         </ion-select>
+         <ion-input class="no-validation-line" [(ngModel)]='bitacora' (ionFocus)="selectModal()" (click)="selectModal();"  [readonly]="true"></ion-input>
+         <ion-icon item-right name="md-arrow-dropdown" color="dark"></ion-icon>
        </button>
 
        <ion-item>
          <ion-label>Fecha experiencia</ion-label>
-         <ion-datetime displayFormat="DDDD DD MMM, YYYY" [(ngModel)]="myDate"></ion-datetime>
+         <ion-datetime class="no-validation-line" displayFormat="DD de MMMM, YYYY" [(ngModel)]="fecha"></ion-datetime>
        </ion-item>
 
        <ion-item>
-         <ion-input placeholder="Ingrese un título interesante (opcional)" (ionFocus)="titleFocus()" [(ngModel)]='title'></ion-input>
+         <ion-input class="no-validation-line" class="bold" placeholder="Ingrese un título interesante (opcional)" (ionFocus)="titleFocus()" [(ngModel)]='title'></ion-input>
        </ion-item>
 
        <ion-fab right *ngIf="showHelp">
@@ -50,7 +42,7 @@
        </ion-fab>
 
        <ion-item>
-         <ion-textarea name="text-input" placeholder="Describa su experiencia de viaje" (ionFocus)="descriptionFocus()" (ionChange)="descriptionChanged()" [(ngModel)]='description' ></ion-textarea>
+         <ion-textarea class="no-validation-line" name="text-input" placeholder="Describa su experiencia de viaje" (ionFocus)="descriptionFocus()" (ionChange)="descriptionChanged()" [(ngModel)]='description' ></ion-textarea>
        </ion-item>
 
   </ion-list>

@@ -3,15 +3,6 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class DataBitacorasPersonales {
 
-/**
-  Estructura: Bitácora Personal
-
-  > Entradas
-      >>  Cuerpo
-      >>  Fotografías
-      >>  Video
-      >>  Fecha Creación
-**/
   _bitacoras_personales: any  =
   [{
     id: 1,
@@ -23,11 +14,21 @@ export class DataBitacorasPersonales {
 
       {
         created_at: "30 Noviembre, 2018",
+        title: "Post de texto",
         body: "Quisque eu commodo augue. Phasellus nisi enim, egestas quis lacinia eu, rutrum posuere magna. Curabitur sit amet ante rutrum, aliquam dui ut, consectetur orci. Morbi sed pulvinar mauris. Nunc ullamcorper rutrum nunc eget porttitor. Sed ac tincidunt ante, at placerat tortor. Phasellus nec bibendum mi, in gravida arcu. Integer vitae ultrices tellus. Suspendisse vitae congue dolor, sit amet faucibus arcu. Curabitur rhoncus urna at dignissim mattis. Donec dapibus massa id tellus rhoncus, et mollis purus bibendum. Nunc et vulputate augue, nec vulputate lacus. Nunc maximus nisl vitae justo tristique interdum. Curabitur posuere sed justo id porta."
       },
 
       {
         created_at: "30 Noviembre, 2018",
+        title: "Post de video",
+        body: "Curabitur sit amet ante rutrum, aliquam dui ut, consectetur orci. Morbi sed pulvinar mauris. Nunc ullamcorper rutrum nunc eget porttitor. Sed ac tincidunt ante, at placerat tortor. Phasellus nec bibendum mi, in gravida arcu. Integer vitae ultrices tellus. Suspendisse vitae congue dolor, sit amet faucibus arcu. Curabitur rhoncus urna at dignissim mattis. Donec dapibus massa id tellus rhoncus, et mollis purus bibendum. Nunc et vulputate augue, nec vulputate lacus. Nunc maximus nisl vitae justo tristique interdum. Curabitur posuere sed justo id porta.",
+        video: "assets/prototype/torres_del_paine.mp4"
+      },
+
+
+      {
+        created_at: "30 Noviembre, 2018",
+        title: "Post de fotografía",
         pics:
         [
           {
@@ -106,7 +107,7 @@ export class DataBitacorasPersonales {
             src: "assets/prototype/img14.png",
           },
           {
-            src: "assets/prototype/img15.png",
+            src: "assets/prototype/img1.png",
           }
         ]
       }
@@ -118,14 +119,23 @@ export class DataBitacorasPersonales {
     end_date: "30 Noviembre, 2018",
 
     collaborators: 1
-  }];
+  },
+{
+  id: 2,
+  title: "General",
+  start_date: "20 Noviembre, 2018",
+  collaborators: 1,
+  entries: []
+}];
 
   getBitacoras(){ return this._bitacoras_personales; }
 
-  getBitacoraNames(){
-    for (let bitacora of this._bitacoras_personales){
-      
-    }
+  getBitacoraTitles(){
+    var title_list = [];
+    for (let bitacora of this._bitacoras_personales)
+      if (bitacora.title != null)
+        title_list.push(bitacora.title);
+    return title_list;
   }
 
   getBitacora(id){
@@ -154,7 +164,7 @@ export class DataBitacorasPersonales {
   }
 
   getFivePictures(bitacora){
-    var pics_list = []
+    var pics_list = [];
     for (let entrada of bitacora.entries ){
       if (pics_list.length >= 5) break;
       if (entrada.pics != null ){
@@ -176,6 +186,22 @@ export class DataBitacorasPersonales {
       if (entrada.videos != null )
         counter += 1;
     return counter;
+  }
+
+  getIndexOfID(id){
+    var index = 0;
+    for (let bitacora of this._bitacoras_personales){
+      if (bitacora.id != null && bitacora.id == id ){
+        return index;
+      }
+      index++;
+    }
+    return -1;
+  }
+
+  setTextEntry(id, entry){
+    var index = this.getIndexOfID(id);
+    this._bitacoras_personales[index].entries.unshift(entry);
   }
 
 
