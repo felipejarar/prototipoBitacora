@@ -1,0 +1,32 @@
+<!-- Generated template for the SelectBitacoraComponent component -->
+<ion-header no-border>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">Cerrar</button>
+    </ion-buttons>
+    <ion-title>
+       Seleccionar lugar
+    </ion-title>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-searchbar placeholder="Filtrar por nombre" [(ngModel)]='search_text' (ionInput)="filterItems($event)"></ion-searchbar>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content center text-center>
+
+  <!--
+  <ion-searchbar placeholder="Filtrar por nombre" [(ngModel)]='search_text' (ionInput)="filterItems($event)"></ion-searchbar>
+  -->
+  <ion-list radio-group [(ngModel)]="selected_place" (ionChange)="onSelectionChange();">
+
+    <ion-item *ngFor="let place of places; let i=index">
+      <ion-label color="dark">{{place}}</ion-label>
+      <ion-radio value="{{place}}"></ion-radio>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

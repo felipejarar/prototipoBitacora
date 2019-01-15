@@ -1,4 +1,127 @@
 <!-- Generated template for the ListadoBitacorasSocialesComponent component -->
-<div>
-  {{text}}
-</div>
+
+<ion-card no-margin class="full-width-card transparent no-padding-top" >
+  <ion-card-content no-padding>
+    <ion-row>
+      <ion-col col-4>
+        <button ion-button full small (click)="presentSortSheet()" class="transparent select-button">
+          <ion-icon name="{{sort_icon}}"></ion-icon>
+          <span>{{sort_label}}</span>
+          <ion-icon name="md-arrow-dropdown"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-5>
+        <button ion-button full small (click)="presentPlaceSheet()" class="transparent select-button">
+          <ion-icon name="{{place_icon}}"></ion-icon>
+          <span>{{place_label}}</span>
+          <ion-icon name="md-arrow-dropdown"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-1>
+
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button full small (click)="presentContentSheet()" class="transparent">
+          <ion-icon name="{{item_icon}}"></ion-icon>
+        </button>
+      </ion-col>
+
+      </ion-row>
+  </ion-card-content>
+</ion-card>
+
+
+<ion-card class="full-width-card" *ngFor="let exp of experience_posts; let i = index">
+  <ion-item *ngIf="exp">
+    <ion-avatar item-start>
+      <img [src]="exp.avatar">
+    </ion-avatar>
+    <h2>{{exp.username}}</h2>
+    <p>{{exp.place}} \u2022 {{exp.time}}</p>
+    <ion-fab top right>
+      <button ion-fab mini class="transparent">
+        <ion-icon name="md-more"></ion-icon>
+      </button>
+    </ion-fab>
+  </ion-item>
+  <ion-card-header *ngIf="exp.title">
+    <h1>{{exp.title}}</h1>
+  </ion-card-header>
+
+  <ion-card-content *ngIf="exp.pics" name="picture-grids">
+
+    <div *ngIf="exp.pics.length == 1">
+      <div class="grid-image-one">
+        <div class="grid-image">
+          <img [src]="exp.pics[0]" (click)=openModal(exp.pics,0) />
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="exp.pics.length == 2">
+
+      <div class="grid-image-two">
+        <div class="grid-image">
+          <img [src]="exp.pics[0]"  (click)=openModal(exp.pics,0) />
+        </div>
+        <div class="grid-image">
+          <img [src]="exp.pics[1]"   (click)=openModal(exp.pics,1) />
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="exp.pics.length == 3">
+      <div class="grid-image-three">
+        <div class="grid-image">
+          <img [src]="exp.pics[0]" (click)=openModal(exp.pics,0)/>
+        </div>
+        <div class="grid-image">
+          <img [src]="exp.pics[1]" (click)=openModal(exp.pics,1)/>
+        </div>
+        <div class="grid-image">
+          <img [src]="exp.pics[2]" (click)=openModal(exp.pics,2)/>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="exp.pics.length == 4">
+      <div class="grid-image-four-or-more">
+        <div class="grid-image">
+          <img [src]="exp.pics[0]" (click)=openModal(exp.pics,0)/>
+        </div>
+        <div class="grid-image">
+          <img [src]="exp.pics[1]" (click)=openModal(exp.pics,1)/>
+        </div>
+        <div class="grid-image">
+          <img [src]="exp.pics[2]" (click)=openModal(exp.pics,2)/>
+        </div>
+        <div class="grid-image">
+          <img [src]="exp.pics[3]" (click)=openModal(exp.pics,3)/>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="exp.pics.length > 4">
+      <div class="grid-image-four-or-more">
+        <div class="grid-image">
+          <img [src]="exp.pics[0]" (click)=openModal(exp.pics,0)/>
+        </div>
+        <div class="grid-image">
+          <img [src]="exp.pics[1]" (click)=openModal(exp.pics,1)/>
+        </div>
+        <div class="grid-image">
+          <img [src]="exp.pics[2]" (click)=openModal(exp.pics,2)/>
+        </div>
+        <div class="grid-image" style="text-align: center; position: relative;">
+          <img [src]="exp.pics[3]" (click)=openModal(exp.pics,3)/>
+          <div style="position:absolute; width: 100%; height: 100%; top: 0; background-color: black; opacity: 0.75;"></div>
+          <div style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%)">
+
+            <h1 style="color: white;"><ion-icon style="padding-right: 5px" name="md-add"></ion-icon> {{ exp.pics.length - 3 }}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-card-content>
+  <ion-card-content *ngIf="exp.body">
+    {{exp.body}}
+  </ion-card-content>
+</ion-card>

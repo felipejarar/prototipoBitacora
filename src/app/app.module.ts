@@ -31,7 +31,7 @@ import { DataBitacorasCompartidas } from '../prototype_data/data_bitacoras_compa
 import { ImageSliderViewerComponent } from '../components/image-slider-viewer/image-slider-viewer';
 import { NewTabComponent } from '../components/new-tab/new-tab';
 import { SelectBitacoraComponent } from '../components/select-bitacora/select-bitacora';
-
+import { PlacesComponent } from '../components/places/places';
 
 @NgModule({
   declarations: [
@@ -62,7 +62,8 @@ import { SelectBitacoraComponent } from '../components/select-bitacora/select-bi
     NewTextExperiencePage,
     ImageSliderViewerComponent,
     NewTabComponent,
-    SelectBitacoraComponent
+    SelectBitacoraComponent,
+    PlacesComponent
   ],
   providers: [
     StatusBar,
