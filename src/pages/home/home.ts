@@ -8,11 +8,13 @@ import { NavController } from 'ionic-angular';
 export class HomePage {
 
   tabs: string;
-  
+
   constructor(
     public navCtrl: NavController) {
       this.tabs = "personal";
   }
 
-
+  search(){
+    console.log("Searching");
+  }
 }

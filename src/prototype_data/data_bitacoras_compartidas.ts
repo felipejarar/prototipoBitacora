@@ -6,37 +6,39 @@ export class DataBitacorasCompartidas {
   _bitacoras_compartidas: any  =
   [{
     id: 1,
+    shared: true,
+    author: "Franz Opazo",
     collaborators: 3,
     permission: "colaborative",
     start_date: "10 Septiembre, 2018",
     end_date: "30 Septiembre, 2018",
-    title: "Viaje con mis amigos a Santiago",
+    sdate: new Date(2018,8,10),
+    edate: new Date(2018,8,30),
+    title: "Viaje con mis amigos en Santiago",
 
     entries:
     [
+
       {
+        created_at: "15 Septiembre, 2018",
         title: "Fantasilandia",
         description: "Fui con mis amigos a fantasilandia un día de semana de gran calor en Santiago, puedo decir que lo pasamos muy bien ,nos subimos a muchos juegos ,yo me desestrese gritando y riendo ,nos refrescabamos en los puntos con agua ,hay que tener en cuenta que mochilas y bolsos no se pueden subir a muchos juegos ,pero hay casilleros para guardarlos ,los juegos son muy seguros y modernos, no hay peligro sólo diversión total",
-        pics: [ "assets/prototype/img10.png"],
-        external_pics:
-        [
-          {
-            pics: [ "assets/prototype/img11.png", "assets/prototype/img12.png", "assets/prototype/img13.png"],
-            author: "John Doe"
-          }
+        pics: [
+          { src : "assets/prototype/img10.png" },
+          { src : "assets/prototype/img11.png" },
+          { src : "assets/prototype/img12.png" },
+          { src : "assets/prototype/img13.png" }
+       ]
+      },
+      {
+        created_at: "15 Septiembre, 2018",
+        author: "Franz Opazo",
+        pics: [
+          { src : "assets/prototype/img10.png"}
         ]
       }
-    ],
+    ]
 
-    external_entries:
-    [
-      {
-        author: "John Doe",
-        pics: ["assets/prototype/img10.png"]
-    },{
-      title: "Lorem Ipsum Fourth",
-      author: "Stacy Chad"
-    }],
   }];
 
   getBitacoras(){
@@ -85,8 +87,7 @@ export class DataBitacorasCompartidas {
       }
     }
 
-    if (pics_list.length == 0)
-      pics_list.push("assets/imgs/default_pic.png");
+    if (pics_list.length == 0)pics_list.push("assets/imgs/default_pic.png");
     return pics_list;
   }
 

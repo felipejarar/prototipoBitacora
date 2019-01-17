@@ -8,7 +8,7 @@
 
   <!-- First Toolbar -->
   <ion-navbar>
-    <ion-title text-uppercase>Bitácora</ion-title>
+
   </ion-navbar>
 
   <ion-toolbar>
@@ -28,115 +28,96 @@
 </ion-header>
 
 
-
 <ion-content>
 
-  <ion-card *ngFor="let entrada of entradas; let i=index" class="full-width-card">
+  <ion-card *ngFor="let exp of entradas; let i=index" class="full-width-card">
 
-    <ion-card-content class="no-padding-bottom">
-      <ion-row class="post-header">
-        <ion-col col-11>
-          <ion-note class="post-date">
-            {{entrada.created_at}}
-          </ion-note>
-        </ion-col>
-        <ion-col col-1>
-          <button class="post-options" ion-button icon-only clear small round color="dark" (click)="openPostActions()">
-              <ion-icon name="md-more"></ion-icon>
-          </button>
-        </ion-col>
-      </ion-row>
+    <ion-item *ngIf="exp">
+        <ion-note name="subtitle" *ngIf="exp.created_at">{{exp.created_at}}</ion-note>
+        <button ion-button  class="transparent" style="float: right; font-size: 2.4rem; margin:0px; top: -2px;" (click)="openPostActions()"><ion-icon name="ios-more"></ion-icon></button>
+    </ion-item>
+
+    <ion-card-content class="header">
+      {{exp.title}}
     </ion-card-content>
 
-    <ion-card-content class="no-padding-top">
-      <h1 *ngIf="entrada.title != null">{{entrada.title}}</h1>
-    </ion-card-content>
-
-
-    <ion-card-content *ngIf="entrada.video != null" overflow-scroll="true">
+    <ion-card-content no-padding class="multimedia"  *ngIf="exp.video != null" overflow-scroll="true">
       <video controls="controls" preload="metadata" webkit-playsinline="webkit-playsinline" width="100%">
-       <source src="{{entrada.video}}" type="video/mp4" />
+       <source src="{{exp.video}}" type="video/mp4" />
       </video>
     </ion-card-content>
 
-    <ion-card-content *ngIf="entrada.pics != null" name="picture-grids">
+    <ion-card-content no-padding class="multimedia" *ngIf="exp.pics != null" name="picture-grids">
 
-      <div *ngIf="entrada.pics.length == 1">
-        <div class="grid-image-one">
-          <div class="grid-image">
-            <img [src]="entrada.pics[0].src" (click)=openModal(entrada.pics,0) />
-          </div>
-        </div>
+      <div *ngIf="exp.pics.length == 1">
+        <img [src]="exp.pics[0].src" (click)=openModal(exp.pics,0) />
       </div>
 
-      <div *ngIf="entrada.pics.length == 2">
-
-        <div class="grid-image-two">
-          <div class="grid-image">
-            <img [src]="entrada.pics[0].src"  (click)=openModal(entrada.pics,0) />
-          </div>
-          <div class="grid-image">
-            <img [src]="entrada.pics[1].src"   (click)=openModal(entrada.pics,1) />
-          </div>
-        </div>
+      <div *ngIf="exp.pics.length == 2" class="grid-image-two">
+        <div class="grid-image"><img [src]="exp.pics[0].src"  (click)=openModal(exp.pics,0) /></div>
+        <div class="grid-image"><img [src]="exp.pics[1].src"   (click)=openModal(exp.pics,1) /></div>
       </div>
 
-      <div *ngIf="entrada.pics.length == 3">
-        <div class="grid-image-three">
-          <div class="grid-image">
-            <img [src]="entrada.pics[0].src" (click)=openModal(entrada.pics,0)/>
-          </div>
-          <div class="grid-image">
-            <img [src]="entrada.pics[1].src" (click)=openModal(entrada.pics,1)/>
-          </div>
-          <div class="grid-image">
-            <img [src]="entrada.pics[2].src" (click)=openModal(entrada.pics,2)/>
-          </div>
-        </div>
+      <div *ngIf="exp.pics.length == 3"  class="grid-image-three">
+        <div class="grid-image"><img [src]="exp.pics[0].src" (click)=openModal(exp.pics,0)/></div>
+        <div class="grid-image"><img [src]="exp.pics[1].src" (click)=openModal(exp.pics,1)/></div>
+        <div class="grid-image"><img [src]="exp.pics[2].src" (click)=openModal(exp.pics,2)/></div>
       </div>
-      <div *ngIf="entrada.pics.length == 4">
+
+      <div *ngIf="exp.pics.length == 4" class="grid-image-four-or-more">
+          <div class="grid-image"><img [src]="exp.pics[0].src" (click)=openModal(exp.pics,0)/></div>
+          <div class="grid-image"><img [src]="exp.pics[1].src" (click)=openModal(exp.pics,1)/></div>
+          <div class="grid-image"><img [src]="exp.pics[2].src" (click)=openModal(exp.pics,2)/></div>
+          <div class="grid-image"><img [src]="exp.pics[3].src" (click)=openModal(exp.pics,3)/></div>
+      </div>
+
+      <div *ngIf="exp.pics.length > 4">
         <div class="grid-image-four-or-more">
-          <div class="grid-image">
-            <img [src]="entrada.pics[0].src" (click)=openModal(entrada.pics,0)/>
-          </div>
-          <div class="grid-image">
-            <img [src]="entrada.pics[1].src" (click)=openModal(entrada.pics,1)/>
-          </div>
-          <div class="grid-image">
-            <img [src]="entrada.pics[2].src" (click)=openModal(entrada.pics,2)/>
-          </div>
-          <div class="grid-image">
-            <img [src]="entrada.pics[3].src" (click)=openModal(entrada.pics,3)/>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="entrada.pics.length > 4">
-        <div class="grid-image-four-or-more">
-          <div class="grid-image">
-            <img [src]="entrada.pics[0].src" (click)=openModal(entrada.pics,0)/>
-          </div>
-          <div class="grid-image">
-            <img [src]="entrada.pics[1].src" (click)=openModal(entrada.pics,1)/>
-          </div>
-          <div class="grid-image">
-            <img [src]="entrada.pics[2].src" (click)=openModal(entrada.pics,2)/>
-          </div>
+          <div class="grid-image"><img [src]="exp.pics[0].src" (click)=openModal(exp.pics,0)/></div>
+          <div class="grid-image"><img [src]="exp.pics[1].src" (click)=openModal(exp.pics,1)/></div>
+          <div class="grid-image"><img [src]="exp.pics[2].src" (click)=openModal(exp.pics,2)/></div>
           <div class="grid-image" style="text-align: center; position: relative;">
-            <img [src]="entrada.pics[3].src" (click)=openModal(entrada.pics,3)/>
+            <img [src]="exp.pics[3].src" (click)=openModal(exp.pics,3)/>
             <div style="position:absolute; width: 100%; height: 100%; top: 0; background-color: black; opacity: 0.75;"></div>
             <div style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%)">
-
-              <h1 style="color: white;"><ion-icon style="padding-right: 5px" name="md-add"></ion-icon> {{ entrada.pics.length - 3 }}</h1>
+              <h1 style="color: white;"><ion-icon style="padding-right: 5px" name="md-add"></ion-icon> {{ exp.pics.length - 3 }}</h1>
             </div>
           </div>
         </div>
       </div>
     </ion-card-content>
 
-
-    <ion-card-content class="no-padding-top">
-      <p>{{entrada.body}}</p>
+    <!--Cuerpo-->
+    <ion-card-content *ngIf="exp.body" class="body" (click)="expClicked(exp)">
+      {{exp.body}}
     </ion-card-content>
+
+    <!-- Footer -->
+    <ion-card-content  *ngIf="exp.author">
+      <ion-note style="text-align: center"> (Compartido por: {{exp.author}})</ion-note>
+    </ion-card-content>
+
+    <!--Footer-->
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-start clear small class="content-small" color="dark" color="{{exp.liked}}" (click)="likePostClicked(exp);">
+          <ion-icon name="thumbs-up"></ion-icon><div>{{exp.likes}} Likes</div>
+        </button>
+      </ion-col>
+
+      <ion-col>
+        <button ion-button icon-start clear small class="content-small" color="dark" (click)="expClicked(exp)">
+          <ion-icon name="text"></ion-icon>
+          <div >{{exp.comments}} Comentarios</div>
+        </button>
+      </ion-col>
+
+      <ion-col center text-center>
+        <button ion-button icon-start clear small class="content-small" color="dark">
+          <ion-icon name="share"></ion-icon><div>Compartir</div>
+        </button>
+      </ion-col>
+    </ion-row>
 
   </ion-card>
 

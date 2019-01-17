@@ -5,34 +5,26 @@
     <button  ion-button icon-only menuToggle>
         <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title text-uppercase>Principal</ion-title>
+    <ion-searchbar (submit) = "search()"></ion-searchbar>
   </ion-toolbar>
 
   <!-- Second toolbar -->
   <ion-toolbar>
     <ion-segment color="primary" [(ngModel)]="tabs">
-      <ion-segment-button value="personal">
-        Personal
-      </ion-segment-button>
-      <ion-segment-button value="shared">
-        Compartidas
-      </ion-segment-button>
       <ion-segment-button value="social">
         Social
+      </ion-segment-button>
+      <ion-segment-button value="personal">
+        Mis experiencias
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
-
-  <listado-bitacoras-sociales></listado-bitacoras-sociales>
-  <!--
-  <listado-bitacoras-personales *ngIf="tabs == 'personal'"></listado-bitacoras-personales>
-  <listado-bitacoras-compartidas *ngIf="tabs == 'shared'"></listado-bitacoras-compartidas>
   <listado-bitacoras-sociales *ngIf="tabs == 'social'"></listado-bitacoras-sociales>
-  -->
-
+  <listado-bitacoras-personales *ngIf="tabs == 'personal'"></listado-bitacoras-personales>
 </ion-content>
 
 <!--

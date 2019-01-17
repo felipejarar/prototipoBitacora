@@ -26,6 +26,13 @@ export class BitacoraPersonalPage {
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public data: DataBitacorasPersonales) {
+
+      var bitacora = navParams.get('data');
+      this.entradas = bitacora.entries;
+
+
+      console.log(bitacora);
+      /**
       var id_bitacora = navParams.get('id');
       var bitacora = data.getBitacora(id_bitacora);
       this.entradas = bitacora.entries;
@@ -39,10 +46,12 @@ export class BitacoraPersonalPage {
         }
         return null;
       });
+
+
       console.log(this.mypics);
       this.num_pic_entradas = this.entradas.map(data.getPicCounterFromEntrada);
       this.tabs = "general"
-
+      **/
   }
 
   openModal(data, index){
@@ -54,7 +63,7 @@ export class BitacoraPersonalPage {
   openPostActions(){
     console.log("Lol");
   }
-  
+
   zoomImage(imageData){
   /**
     this.file.readAsDataURL(cordova.file.applicationDirectory + "www/", imageData)

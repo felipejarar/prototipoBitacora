@@ -3,27 +3,29 @@
 <ion-card no-margin class="full-width-card transparent no-padding-top" >
   <ion-card-content no-padding>
     <ion-row>
-      <ion-col col-4>
-        <button ion-button full small (click)="presentSortSheet()" class="transparent select-button">
-          <ion-icon name="{{sort_icon}}"></ion-icon>
-          <span>{{sort_label}}</span>
-          <ion-icon name="md-arrow-dropdown"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col col-5>
-        <button ion-button full small (click)="presentPlaceSheet()" class="transparent select-button">
-          <ion-icon name="{{place_icon}}"></ion-icon>
-          <span>{{place_label}}</span>
-          <ion-icon name="md-arrow-dropdown"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col col-1>
 
-      </ion-col>
-      <ion-col col-2>
-        <button ion-button full small (click)="presentContentSheet()" class="transparent">
-          <ion-icon name="{{item_icon}}"></ion-icon>
+      <ion-col>
+        <button ion-button icon-start clear small  (click)="presentSortSheet()" class="transparent select-button">
+          <ion-icon name="{{sort_icon}}"></ion-icon>
+          <div>{{sort_label}}</div>
+          <ion-icon name="md-arrow-dropdown"></ion-icon>
         </button>
+      </ion-col>
+
+      <ion-col>
+        <button ion-button icon-start clear small  (click)="presentPlaceSheet()" class="transparent select-button">
+          <ion-icon name="{{place_icon}}"></ion-icon>
+          <div>{{place_label}}</div>
+          <ion-icon name="md-arrow-dropdown"></ion-icon>
+        </button>
+      </ion-col>
+
+      <ion-col center text-center>
+        <ion-note>
+          <button ion-button icon-start clear small end (click)="presentContentSheet()"  class="transparent select-button" style="float: right">
+            <ion-icon name="{{item_icon}}"></ion-icon>
+          </button>
+        </ion-note>
       </ion-col>
 
       </ion-row>
@@ -31,97 +33,182 @@
 </ion-card>
 
 
-<ion-card class="full-width-card" *ngFor="let exp of experience_posts; let i = index">
-  <ion-item *ngIf="exp">
-    <ion-avatar item-start>
-      <img [src]="exp.avatar">
-    </ion-avatar>
-    <h2>{{exp.username}}</h2>
-    <p>{{exp.place}} \u2022 {{exp.time}}</p>
-    <ion-fab top right>
-      <button ion-fab mini class="transparent">
-        <ion-icon name="md-more"></ion-icon>
-      </button>
-    </ion-fab>
-  </ion-item>
-  <ion-card-header *ngIf="exp.title">
-    <h1>{{exp.title}}</h1>
-  </ion-card-header>
 
-  <ion-card-content *ngIf="exp.pics" name="picture-grids">
+<div name="experiencias" *ngFor="let exp of experience_posts; let i = index">
 
-    <div *ngIf="exp.pics.length == 1">
-      <div class="grid-image-one">
-        <div class="grid-image">
-          <img [src]="exp.pics[0]" (click)=openModal(exp.pics,0) />
+  <!-- FOROS -->
+  <div name="foro">
+    <ion-card class="full-width-card" *ngIf="forums[i] && (forums[i].forum_place == place_label || place_label == 'Chile')" >
+
+
+      <ion-item *ngIf="forums[i]">
+        <ion-avatar item-start><img [src]="forums[i].forum_avatar"></ion-avatar>
+        <h2 name="title"><a (click)="forumClicked(forums[i].forum_id)">Foro/{{forums[i].forum_name}}</a></h2>
+        <p name="subtitle">{{forums[i].username}} \u2022 {{forums[i].time}}</p>
+        <ion-fab top right><button ion-fab mini class="transparent" (click)="forumOption()"><ion-icon name="ios-more"></ion-icon></button></ion-fab>
+      </ion-item>
+
+
+      <ion-card-content *ngIf="forums[i].title" class="header" (click)="forumPostClicked(forums[i].id)">
+        <button ion-button outline small style="height: 15px; font-size: x-small; margin-top: 0px; top:-4px; margin-right: 5px;" color="dark">{{forums[i].tag}}</button>{{forums[i].title}}<br>
+      </ion-card-content>
+
+      <ion-card-content *ngIf="forums[i].pic" (click)="forumPostClicked(forums[i].id)" class="multimedia">
+        <img [src]="forums[i].pic"/>
+      </ion-card-content>
+
+      <ion-card-content *ngIf="forums[i].video" overflow-scroll="true" (click)="forumPostClicked(i)" class="multimedia">>
+        <video controls="controls" preload="metadata" webkit-playsinline="webkit-playsinline" width="100%"><source src="{{exp.video}}" type="video/mp4" /></video>
+      </ion-card-content>
+
+      <ion-card-content *ngIf="forums[i].body" class="body" (click)="forumPostClicked(forums[i].id)">
+        <span *ngIf="forums[i].body.length <= body_limit">{{forums[i].body}}</span><span *ngIf="forums[i].body.length > body_limit">{{forums[i].body.substring(0,body_limit)}}... <a style="margin-left:10px;">Ver más</a></span>
+      </ion-card-content>
+
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-start clear small class="content-small" color="{{forums[i].liked}}" (click)="likePostClicked(forums[i]);"> <ion-icon name="thumbs-up"></ion-icon><div>{{forums[i].likes}} Likes</div> </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-start clear small class="content-small" color="dark" (click)="forumPostClicked(i)"><ion-icon name="text"></ion-icon><div>{{forums[i].comments}} Comentarios</div></button>
+        </ion-col>
+        <ion-col center text-center>
+            <button ion-button icon-start clear small class="content-small" color="dark"><ion-icon name="share"></ion-icon><div>Compartir</div></button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+
+  <!-- PUBLICIDAD -->
+  <div *ngIf="i==2" name="publicidad">
+    <ion-card *ngIf="ads[0] && (ads[0].place == place_label || place_label == 'Chile')" class="full-width-card">
+
+      <ion-item (click)="adClicked(ads[0])">
+        <ion-avatar item-start><img [src]="ads[0].avatar"></ion-avatar>
+        <h2 name="title">{{ads[0].name}}</h2>
+        <p name="subtitle">{{ads[0].place}} \u2022 {{ads[0].business}}</p>
+      </ion-item>
+
+      <ion-item class="ads-item">
+        <ion-fab bottom right style="bottom: 15px"><button ion-button color="danger" (click)="adReferenceClicked(ads[0])">Cotizar en Booking<ion-icon name="md-arrow-dropright" style="margin-left: 15px"></ion-icon></button></ion-fab>
+        <img [src]="ads[0].pic" (click)="adClicked(ads[0])"/>
+      </ion-item>
+
+      <ion-card-content  *ngIf="ads[0].body" style="text-align: center"  (click)="adClicked(ads[0])">
+        {{ads[0].body}}
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- EXPERIENCIA -->
+  <ion-card class="full-width-card" *ngIf="exp && (exp.place == place_label || place_label == 'Chile')">
+
+    <ion-item *ngIf="exp">
+      <ion-avatar item-start><img [src]="exp.avatar"></ion-avatar>
+      <h2 name="username"><a (click)="userClicked(exp.username)">Usuario/{{exp.username}}</a></h2>
+      <p name="details">{{exp.place}} \u2022 {{exp.time}}</p>
+      <ion-fab top right><button ion-fab mini class="transparent"><ion-icon name="ios-more"></ion-icon></button></ion-fab>
+    </ion-item>
+
+    <ion-card-content *ngIf="exp.title"  class="header" (click)="expClicked(exp)">
+      <button ion-button outline small style="height: 15px; font-size: x-small; margin-top: 0px; top:-4px; margin-right: 5px;" color="dark">Experiencia</button>{{exp.title}}
+    </ion-card-content>
+
+    <!--VIDEO-->
+    <ion-card-content *ngIf="exp.video" overflow-scroll="true" class="multimedia"  (click)="expClicked(exp)">
+      <video controls="controls" preload="metadata" webkit-playsinline="webkit-playsinline" width="100%"><source src="{{exp.video}}" type="video/mp4" /></video>
+    </ion-card-content>
+
+    <!--IMAGENES-->
+    <ion-card-content *ngIf="exp.pics" name="picture-grids"  class="multimedia" (click)="expClicked(exp)">
+      <div *ngIf="exp.pics.length == 1">
+        <div class="grid-image-one"><div class="grid-image"><img [src]="exp.pics[0]"/></div></div>
+      </div>
+
+      <div *ngIf="exp.pics.length == 2">
+        <div class="grid-image-two">
+          <div class="grid-image"><img [src]="exp.pics[0]"/></div>
+          <div class="grid-image"><img [src]="exp.pics[1]"/></div>
         </div>
       </div>
-    </div>
 
-    <div *ngIf="exp.pics.length == 2">
-
-      <div class="grid-image-two">
-        <div class="grid-image">
-          <img [src]="exp.pics[0]"  (click)=openModal(exp.pics,0) />
-        </div>
-        <div class="grid-image">
-          <img [src]="exp.pics[1]"   (click)=openModal(exp.pics,1) />
+      <div *ngIf="exp.pics.length == 3">
+        <div class="grid-image-three">
+          <div class="grid-image"><img [src]="exp.pics[0]"/></div>
+          <div class="grid-image"><img [src]="exp.pics[1]"/></div>
+          <div class="grid-image"><img [src]="exp.pics[2]"/></div>
         </div>
       </div>
-    </div>
-
-    <div *ngIf="exp.pics.length == 3">
-      <div class="grid-image-three">
-        <div class="grid-image">
-          <img [src]="exp.pics[0]" (click)=openModal(exp.pics,0)/>
-        </div>
-        <div class="grid-image">
-          <img [src]="exp.pics[1]" (click)=openModal(exp.pics,1)/>
-        </div>
-        <div class="grid-image">
-          <img [src]="exp.pics[2]" (click)=openModal(exp.pics,2)/>
+      <div *ngIf="exp.pics.length == 4">
+        <div class="grid-image-four-or-more">
+          <div class="grid-image"><img [src]="exp.pics[0]""/></div>
+          <div class="grid-image"><img [src]="exp.pics[1]"/></div>
+          <div class="grid-image"><img [src]="exp.pics[2]"/></div>
+          <div class="grid-image"><img [src]="exp.pics[3]"/></div>
         </div>
       </div>
-    </div>
-    <div *ngIf="exp.pics.length == 4">
-      <div class="grid-image-four-or-more">
-        <div class="grid-image">
-          <img [src]="exp.pics[0]" (click)=openModal(exp.pics,0)/>
-        </div>
-        <div class="grid-image">
-          <img [src]="exp.pics[1]" (click)=openModal(exp.pics,1)/>
-        </div>
-        <div class="grid-image">
-          <img [src]="exp.pics[2]" (click)=openModal(exp.pics,2)/>
-        </div>
-        <div class="grid-image">
-          <img [src]="exp.pics[3]" (click)=openModal(exp.pics,3)/>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="exp.pics.length > 4">
-      <div class="grid-image-four-or-more">
-        <div class="grid-image">
-          <img [src]="exp.pics[0]" (click)=openModal(exp.pics,0)/>
-        </div>
-        <div class="grid-image">
-          <img [src]="exp.pics[1]" (click)=openModal(exp.pics,1)/>
-        </div>
-        <div class="grid-image">
-          <img [src]="exp.pics[2]" (click)=openModal(exp.pics,2)/>
-        </div>
-        <div class="grid-image" style="text-align: center; position: relative;">
-          <img [src]="exp.pics[3]" (click)=openModal(exp.pics,3)/>
-          <div style="position:absolute; width: 100%; height: 100%; top: 0; background-color: black; opacity: 0.75;"></div>
-          <div style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%)">
-
+      <div *ngIf="exp.pics.length > 4">
+        <div class="grid-image-four-or-more">
+          <div class="grid-image"><img [src]="exp.pics[0]"/></div>
+          <div class="grid-image"><img [src]="exp.pics[1]"/></div>
+          <div class="grid-image"><img [src]="exp.pics[2]"/></div>
+          <div class="grid-image" style="text-align: center; position: relative;">
+            <img [src]="exp.pics[3]"/>
+            <div style="position:absolute; width: 100%; height: 100%; top: 0; background-color: black; opacity: 0.75;"></div>
+            <div style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%)">
             <h1 style="color: white;"><ion-icon style="padding-right: 5px" name="md-add"></ion-icon> {{ exp.pics.length - 3 }}</h1>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </ion-card-content>
-  <ion-card-content *ngIf="exp.body">
-    {{exp.body}}
-  </ion-card-content>
-</ion-card>
+    </ion-card-content>
+
+    <!--Cuerpo-->
+    <ion-card-content *ngIf="exp.body" class="body" (click)="expClicked(exp)">
+      <span *ngIf="exp.body.length <= body_limit">{{exp.body}}</span><span *ngIf="exp.body.length > body_limit">{{exp.body.substring(0,body_limit)}}... <a style="margin-left:10px;">Ver más</a></span>
+    </ion-card-content>
+
+    <!--Footer-->
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-start clear small class="content-small" color="dark" color="{{exp.liked}}" (click)="likePostClicked(exp);">
+          <ion-icon name="thumbs-up"></ion-icon><div>{{exp.likes}} Likes</div>
+        </button>
+      </ion-col>
+
+      <ion-col>
+        <button ion-button icon-start clear small class="content-small" color="dark" (click)="expClicked(exp)">
+          <ion-icon name="text"></ion-icon>
+          <div >{{exp.comments}} Comentarios</div>
+        </button>
+      </ion-col>
+
+      <ion-col center text-center>
+        <button ion-button icon-start clear small class="content-small" color="dark">
+          <ion-icon name="share"></ion-icon><div>Compartir</div>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</div>
+
+<!-- PUBLICIDAD -->
+<div name="publicidad">
+  <ion-card *ngIf="ads[1] && (ads[1].place == place_label || place_label == 'Chile')" class="full-width-card">
+
+    <ion-item (click)="adClicked(ads[1])">
+      <ion-avatar item-start><img [src]="ads[1].avatar"></ion-avatar>
+      <h2 name="title">{{ads[1].name}}</h2>
+      <p name="subtitle">{{ads[1].place}} \u2122 {{ads[1].business}}</p>
+    </ion-item>
+
+    <ion-item class="ads-item">
+      <ion-fab bottom right style="bottom: 15px"><button ion-button color="danger" (click)="adReferenceClicked(ads[1])">Visitar página web<ion-icon name="md-arrow-dropright" style="margin-left: 15px"></ion-icon></button></ion-fab>
+      <img [src]="ads[1].pic" (click)="adClicked(ads[1])"/>
+    </ion-item>
+
+    <ion-card-content *ngIf="ads[1].body" style="text-align: center" (click)="adClicked(ads[1])">
+      {{ads[1].body}}
+    </ion-card-content>
+  </ion-card>
+</div>

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActionSheetController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { DataBitacorasPersonales } from '../../prototype_data/data_bitacoras_personales';
+import { DataBitacorasCompartidas } from '../../prototype_data/data_bitacoras_compartidas';
+
 import { NavController } from 'ionic-angular';
 import { BitacoraPersonalPage} from '../../pages/bitacora-personal/bitacora-personal';
 
@@ -26,21 +28,42 @@ export class ListadoBitacorasPersonalesComponent {
   bitacoras_personales_pic_counter: any;
   bitacoras_personales_vid_counter: any;
 
+  bitacoras_compartidas: any;
+  bitacoras_compartidas_pics: any;
+  bitacoras_compartidas_post_counter: any;
+  bitacoras_compartidas_pic_counter: any;
+  bitacoras_compartidas_vid_counter: any;
+
+  bitacoras: any;
+  bitacoras_pics: any;
+  bitacoras_post_counter: any;
+  bitacoras_pic_counter: any;
+  bitacoras_vid_counter: any;
+
   constructor(
-    public data: DataBitacorasPersonales,
+    public pdata: DataBitacorasPersonales,
+    public cdata: DataBitacorasCompartidas,
     public navCtrl: NavController,
     public actionSheetCtrl: ActionSheetController,
     public alertCtrl: AlertController) {
-      this.bitacoras_personales = data.getBitacoras();
-      this.bitacoras_personales_pics = this.bitacoras_personales.map(data.getFivePictures);
-      this.bitacoras_personales_post_counter = this.bitacoras_personales.map(data.getPostCounter);
-      this.bitacoras_personales_pic_counter = this.bitacoras_personales.map(data.getPicCounter);
-      this.bitacoras_personales_vid_counter = this.bitacoras_personales.map(data.getVidCounter);
-      this.bitacoras_personales_pager = this.bitacoras_personales_post_counter.map(function(x){ return x > 1 });
-  }
 
-  openBitacora(id){
-    var param = { id: id };
+      this.bitacoras_personales = pdata.getBitacoras();
+      this.bitacoras_compartidas = cdata.getBitacoras();
+      this.bitacoras =  this.bitacoras_personales.concat(this.bitacoras_compartidas);
+      this.bitacoras = this.bitacoras.sort((a,b) => (a.edate < b.edate) ? 1 : ((b.edate < a.edate) ? -1 : 0));
+      this.bitacoras_pics = this.bitacoras.map(function(x){ if (x.shared){ return cdata.getFivePictures(x); } else{ return pdata.getFivePictures(x) } });
+      this.bitacoras_post_counter = this.bitacoras.map(function(x){ if (x.shared){ return cdata.getPostCounter(x); } else{ return pdata.getPostCounter(x) } });
+      this.bitacoras_pic_counter = this.bitacoras.map(function(x){ if (x.shared){ return cdata.getPicCounter(x); } else{ return pdata.getPicCounter(x) } });
+      this.bitacoras_vid_counter = this.bitacoras.map(function(x){ if (x.shared){ return cdata.getVidCounter(x); } else{ return pdata.getVidCounter(x) } });
+
+
+      console.log(this.bitacoras);
+
+      console.log(this.bitacoras_pics);
+    }
+
+  openBitacora(bitacora){
+    var param = { data: bitacora };
     this.navCtrl.push(BitacoraPersonalPage, param);
   }
 

@@ -1,7 +1,6 @@
 page-bitacora-personal {
 
   .grid-image-one{
-    margin-top: -13px;
     display: grid;
     grid-template-columns: 1fr;
     grid-auto-rows: 280px;
@@ -20,7 +19,6 @@ page-bitacora-personal {
   }
 
   .grid-image-two{
-    margin-top: -13px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: 280px;
@@ -31,7 +29,6 @@ page-bitacora-personal {
   }
 
   .grid-image-three{
-    margin-top: -13px;
     display: grid;
     grid-template-columns: repeat(15,1fr);
     grid-auto-rows: 35px;
@@ -54,7 +51,6 @@ page-bitacora-personal {
   }
 
   .grid-image-four-or-more{
-    margin-top: -13px;
     display: grid;
     grid-template-columns: repeat(2,1fr);
     grid-auto-rows: 140px;
@@ -79,8 +75,5 @@ page-bitacora-personal {
     }
   }
 
-  grid-iamge-five-or-more{
-
-  }
 
 }

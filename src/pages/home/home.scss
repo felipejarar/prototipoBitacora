@@ -1,15 +1,14 @@
 page-home {
-  
+
   .colored-button {
     color: #747474;
   }
 
   .swiper-pagination {
-      padding: 3px;
       bottom: 0px !important;
-      background-color: rgba(72,138,255,0.75);
+      background-color: white;
       .swiper-pagination-bullet {
-        background: #FFF;
+        background: black;
         margin: 0 3px;
       }
     }

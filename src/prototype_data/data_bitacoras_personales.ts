@@ -115,15 +115,18 @@ export class DataBitacorasPersonales {
     ],
 
     start_date: "24 Noviembre, 2018",
-
     end_date: "30 Noviembre, 2018",
-
+    sdate: new Date(2018,11,24),
+    edate: new Date(2018,11,30),
     collaborators: 1
   },
 {
   id: 2,
-  title: "General",
-  start_date: "20 Noviembre, 2018",
+  title: "Bitácora general",
+  start_date: "20 Octubre, 2018",
+  sdate :new Date(2018, 8, 20),
+  edate: new Date(2018, 8, 20),
+
   collaborators: 1,
   entries: []
 }];

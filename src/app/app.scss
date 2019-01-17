@@ -15,6 +15,22 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+.no-padding{
+  padding: 0px !important;
+  margin: 0px !important;
+}
+
+ion-item.ads-item{
+  padding: 0px !important;
+  margin: 0px !important;
+  .item-inner{
+    padding-right: 0px !important;
+  }
+   ion-label{
+     margin-left: 0px !important; margin-right: 0px !important; margin-top: 0px !important;
+   }
+}
+
 .no-padding-bottom{
   padding-bottom: 0px;
 }
@@ -30,19 +46,21 @@
 ion-select.full-width{
     width: 100% !important;
     max-width: 100% !important;
+
 }
 
+
+
 button.select-button{
-  font-size: smaller;
+  font-size: x-small;
   .button-inner{
     justify-content:flex-start;
-
   }
   ion-icon:first-child{
     padding-right: 10px;
   }
   span:nth-child(2){
-    max-width:120px;
+    max-width:130px;
     overflow: hidden;
   }
   ion-icon:nth-child(3){
@@ -50,6 +68,47 @@ button.select-button{
   }
 }
 
+
+button.content-small{
+  div{
+    font-size: x-small !important;
+    padding-top:2px;
+  }
+}
+
+ion-card{
+  ion-card-content.header{
+    font-size: 1.8rem;
+    font-weight: normal;
+    padding-top:0px;
+    padding-bottom: 0px;
+  }
+
+  ion-card-content.body{
+    font-size: 1.2rem;
+    font-weight: normal;
+    padding-top: 0px;
+  }
+
+  ion-card-content.multimedia{
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    video{
+      max-height: 267px;
+      background-color: black;
+    }
+  }
+
+}
+
+ion-toolbar{
+  ion-searchbar input{
+      background-color: #e5e5e5 !important;
+      box-shadow: none !important;
+  }
+}
 
 .transparent{
   background-color:  transparent !important;
@@ -63,8 +122,8 @@ button.select-button{
   outline: none !important;
 }
 
-
 ion-card.full-width-card{
+  margin-top: 0px !important;
   margin-left: 0px !important;
   margin-right: 0px !important;
   width: 100% !important;
@@ -122,7 +181,6 @@ ion-content{
 }
 
 .grid-image-two{
-  margin-top: -13px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-auto-rows: 280px;
@@ -133,7 +191,6 @@ ion-content{
 }
 
 .grid-image-three{
-  margin-top: -13px;
   display: grid;
   grid-template-columns: repeat(15,1fr);
   grid-auto-rows: 35px;
@@ -156,7 +213,7 @@ ion-content{
 }
 
 .grid-image-four-or-more{
-  margin-top: -13px;
+
   display: grid;
   grid-template-columns: repeat(2,1fr);
   grid-auto-rows: 140px;

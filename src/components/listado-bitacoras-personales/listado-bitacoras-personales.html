@@ -10,69 +10,50 @@
 </button>
 -->
 
-<ion-card *ngFor="let bitacora of bitacoras_personales; let i=index" class="full-width-card">
+<ion-card *ngFor="let bitacora of bitacoras; let i=index" class="full-width-card">
 
-    <ion-card-content>
-      <ion-row class="post-header">
-        <ion-col col-11 (click)="openBitacora(bitacora.id)">
-          <ion-note class="post-date">
-            <span>{{bitacora.start_date}}</span><span *ngIf="bitacora.end_date != null"> / {{bitacora.end_date}} </span>
-          </ion-note>
-        </ion-col>
+  <ion-item *ngIf="bitacora" (click)="openBitacora(bitacora)">
+    <ion-note name="subtitle" *ngIf="bitacora.end_date">{{bitacora.start_date}} \u2022 {{bitacora.end_date}}</ion-note>
+    <ion-note name="subtitle" *ngIf="!bitacora.end_date">{{bitacora.start_date}}</ion-note>
+    <button ion-button  class="transparent" style="float: right; font-size: 2.4rem; margin:0px; top: -2px;" (click)="openBitacoraActions()"><ion-icon name="ios-more"></ion-icon></button>
+  </ion-item>
 
-        <ion-col col-1>
-            <button class="post-options" ion-button icon-only clear small round color="dark" (click)="openBitacoraActions()">
-                <ion-icon name="md-more"></ion-icon>
-            </button>
-        </ion-col>
+  <ion-card-content *ngIf="bitacora.title" (click)="openBitacora(bitacora)" class="header" style="text-align: center; margin-bottom: 15px">
+    <button *ngIf="bitacora.author" ion-button outline small style="height: 15px; font-size: x-small; margin-top: 0px; top:-4px; margin-right: 5px;" color="dark">Compartida</button>
+    <div>{{bitacora.title}}</div>
+  </ion-card-content>
 
-      </ion-row>
+  <ion-card-content no-padding (click)="openBitacora(bitacora)">
+    <ion-slides *ngIf="bitacoras_pics[i].length > 1" pager="false" effect="fade">
+      <ion-slide *ngFor="let pic of bitacoras_pics[i]">
+        <img [src]="pic"/>
+      </ion-slide>
+    </ion-slides>
 
-      <ion-card-title class="post-title" (click)="openBitacora(bitacora.id)">{{bitacora.title}}</ion-card-title>
-
-    </ion-card-content>
-
-
-      <ion-slides *ngIf="bitacoras_personales_pics[i].length > 1" pager="true" effect="fade">
-        <ion-slide *ngFor="let pic of bitacoras_personales_pics[i]">
-          <img [src]="pic"/>
-        </ion-slide>
-      </ion-slides>
-
-      <ion-slides *ngIf="bitacoras_personales_pics[i].length == 1" pager="false" effect="fade">
-        <ion-slide>
-          <img [src]="bitacoras_personales_pics[i]"/>
-        </ion-slide>
-      </ion-slides>
-
-
+    <ion-slides *ngIf="bitacoras_pics[i].length == 1" pager="false" effect="fade">
+      <ion-slide>
+        <img [src]="bitacoras_pics[i]"/>
+      </ion-slide>
+    </ion-slides>
+  </ion-card-content>
 
     <ion-row>
       <ion-col>
-        <button ion-button icon-start clear small disable-hover class="colored-button">
+        <button ion-button icon-start clear small disable-hover class="content-small" color="dark">
           <ion-icon name="document"></ion-icon>
-          <div>{{bitacoras_personales_post_counter[i]}}</div>
+          <div>{{bitacoras_post_counter[i]}} Textos</div>
         </button>
       </ion-col>
-
       <ion-col>
-        <button ion-button icon-start clear small disable-hover class="colored-button">
+        <button ion-button icon-start clear small disable-hover class="content-small" color="dark">
           <ion-icon name="md-camera"></ion-icon>
-          <div>{{bitacoras_personales_pic_counter[i]}}</div>
+          <div>{{bitacoras_pic_counter[i]}} Fotos</div>
         </button>
       </ion-col>
-
       <ion-col>
-        <button ion-button icon-start clear small disable-hover class="colored-button">
+        <button ion-button icon-start clear small disable-hover class="content-small" color="dark">
           <ion-icon name="md-videocam"></ion-icon>
-          <div>{{bitacoras_personales_vid_counter[i]}}</div>
-        </button>
-      </ion-col>
-
-      <ion-col>
-        <button ion-button icon-start clear small disable-hover class="colored-button">
-          <ion-icon name="md-eye"></ion-icon>
-          <div>336</div>
+          <div>{{bitacoras_vid_counter[i]}} Videos</div>
         </button>
       </ion-col>
     </ion-row>
