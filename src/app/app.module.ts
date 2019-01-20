@@ -10,11 +10,14 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { MessagesPage } from '../pages/messages/messages'
+import { ForumsPage }from '../pages/forums/forums'
+import { TourismPage }from '../pages/tourism/tourism'
+
 import { BitacoraPersonalPage } from "../pages/bitacora-personal/bitacora-personal";
-
-
+import { NewPhotoExperiencePage } from  "../pages/new-photo-experience/new-photo-experience";
+import { NewVideoExperiencePage } from  "../pages/new-video-experience/new-video-experience";
 import { NewTextExperiencePage } from "../pages/new-text-experience/new-text-experience";
-
 
 
 
@@ -41,6 +44,12 @@ import { PlacesComponent } from '../components/places/places';
     HomePage,
     TabsPage,
     BitacoraPersonalPage,
+    NewTextExperiencePage,
+    MessagesPage,
+    ForumsPage,
+    TourismPage,
+    NewPhotoExperiencePage,
+    NewVideoExperiencePage,
     NewTextExperiencePage
   ],
   imports: [
@@ -63,7 +72,14 @@ import { PlacesComponent } from '../components/places/places';
     ImageSliderViewerComponent,
     NewTabComponent,
     SelectBitacoraComponent,
-    PlacesComponent
+    PlacesComponent,
+    NewTextExperiencePage,
+    MessagesPage,
+    ForumsPage,
+    TourismPage,
+    NewPhotoExperiencePage,
+    NewVideoExperiencePage,
+    NewTextExperiencePage
   ],
   providers: [
     StatusBar,

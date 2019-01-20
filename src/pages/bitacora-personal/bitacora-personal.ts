@@ -31,7 +31,7 @@ export class BitacoraPersonalPage {
       this.entradas = bitacora.entries;
 
 
-      console.log(bitacora);
+      console.log( bitacora.entries);
       /**
       var id_bitacora = navParams.get('id');
       var bitacora = data.getBitacora(id_bitacora);

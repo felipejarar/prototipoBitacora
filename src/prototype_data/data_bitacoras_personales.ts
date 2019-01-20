@@ -205,6 +205,8 @@ export class DataBitacorasPersonales {
   setTextEntry(id, entry){
     var index = this.getIndexOfID(id);
     this._bitacoras_personales[index].entries.unshift(entry);
+    console.log(this._bitacoras_personales);
+
   }
 
 

@@ -99,5 +99,23 @@ export class DataBitacorasCompartidas {
     return counter;
   }
 
+  getIndexOfID(id){
+    var index = 0;
+    for (let bitacora of this._bitacoras_compartidas){
+      if (bitacora.id != null && bitacora.id == id ){
+        return index;
+      }
+      index++;
+    }
+    return -1;
+  }
+
+
+  setTextEntry(id, entry){
+    var index = this.getIndexOfID(id);
+    this._bitacoras_compartidas[index].entries.unshift(entry);
+    console.log(this._bitacoras_compartidas);
+
+  }
 
 }

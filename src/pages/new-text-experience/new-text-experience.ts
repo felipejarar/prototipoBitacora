@@ -54,7 +54,10 @@ export class NewTextExperiencePage {
     var data = { title: this.title, body: this.description, created_at: created_at }
     if (this.backup_type == "personal"){
       this.dataPersonal.setTextEntry(this.backup_id, data);
-      this.navCtrl.push(BitacoraPersonalPage, { id: this.backup_id });
+      this.navCtrl.push(BitacoraPersonalPage, { data: this.dataPersonal.getBitacora(this.backup_id) });
+    } else{
+      this.dataCompartida.setTextEntry(this.backup_id, data);
+      this.navCtrl.push(BitacoraPersonalPage, { data: this.dataCompartida.getBitacora(this.backup_id) });
     }
   }
 
