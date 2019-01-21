@@ -100,15 +100,16 @@
     <!--Footer-->
     <ion-row>
       <ion-col>
-        <button ion-button icon-start clear small class="content-small" color="dark" color="{{exp.liked}}" (click)="likePostClicked(exp);">
-          <ion-icon name="thumbs-up"></ion-icon><div>{{exp.likes}} Likes</div>
+        <button ion-button icon-start clear small class="content-small"  color="{{backup_liked}}" (click)="likePostClicked(exp);">
+          <ion-icon name="thumbs-up" c ></ion-icon><div *ngIf="exp.likes">{{exp.likes}} Likes</div><div *ngIf="!exp.likes">{{backup_liked_count}} Likes</div>
         </button>
       </ion-col>
 
       <ion-col>
         <button ion-button icon-start clear small class="content-small" color="dark" (click)="expClicked(exp)">
           <ion-icon name="text"></ion-icon>
-          <div >{{exp.comments}} Comentarios</div>
+          <div  *ngIf="exp.comments">{{exp.comments}} Comentarios</div>
+          <div  *ngIf="!exp.comments">0 Comentarios</div>
         </button>
       </ion-col>
 

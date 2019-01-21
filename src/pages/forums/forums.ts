@@ -8,7 +8,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-forums',
   templateUrl: 'forums.html',
@@ -22,4 +21,7 @@ export class ForumsPage {
     console.log('ionViewDidLoad ForumsPage');
   }
 
+  search(){
+    console.log("Search");
+  }
 }

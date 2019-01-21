@@ -6,9 +6,9 @@ export class DataBitacorasPersonales {
   _bitacoras_personales: any  =
   [{
     id: 1,
-
     title: "Viaje al sur de Chile",
-
+    likes: 2,
+    comments: 0,
     entries:
     [
 
@@ -122,6 +122,8 @@ export class DataBitacorasPersonales {
   },
 {
   id: 2,
+  likes: 5,
+  comments: 1,
   title: "Bitácora general",
   start_date: "20 Octubre, 2018",
   sdate :new Date(2018, 8, 20),

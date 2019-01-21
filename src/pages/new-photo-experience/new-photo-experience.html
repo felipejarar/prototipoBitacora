@@ -4,15 +4,57 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>new-photo-experience</ion-title>
+<ion-header no-border>
+  <ion-navbar no-border>
+    <ion-title>Experiencia de fotografía</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="publish()">
+        CREAR
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content >
 
-<ion-content padding>
+  <ion-list>
 
+      <button ion-item (click)="selectModal();" style="border-bottom: solid; border-width: thin; border-color: #dedede;">
+        <ion-icon name="ios-bookmarks" item-start color="primary"></ion-icon>
+         <ion-label color="primary" stacked>Seleccionar bitácora de viaje</ion-label>
+         <ion-input class="no-validation-line" [(ngModel)]='bitacora' (ionFocus)="selectModal()" (click)="selectModal();"  [readonly]="true"></ion-input>
+         <ion-icon item-right name="md-arrow-dropdown" color="dark"></ion-icon>
+       </button>
+
+       <ion-item>
+         <ion-label>Fecha experiencia</ion-label>
+         <ion-datetime class="no-validation-line" displayFormat="DD de MMMM, YYYY" [(ngModel)]="fecha"></ion-datetime>
+       </ion-item>
+
+       <ion-item>
+         <ion-input class="no-validation-line" class="bold" placeholder="Ingrese un título interesante (opcional)" (ionFocus)="titleFocus()" [(ngModel)]='title'></ion-input>
+       </ion-item>
+
+       <ion-row style="margin-top: 100px" *ngIf="image != null && image.length == 0">
+
+          <ion-col col-3>
+
+          </ion-col>
+
+          <ion-col>
+            <button ion-button round style="height: 50px; width: 50px; margin-right: 50px;"  (click)="imageClicked();" color="dark">
+              <ion-icon name="camera" large></ion-icon>
+            </button>
+            <button ion-button round  style="height: 50px; width: 50px;" color="dark"  (click)="imageClicked();">
+              <ion-icon name="image" large></ion-icon>
+            </button>
+          </ion-col>
+
+        </ion-row>
+
+        <ion-card no-padding *ngFor="let img of image">
+          <img [src]="img.src"/>
+        </ion-card>
+
+  </ion-list>
 </ion-content>

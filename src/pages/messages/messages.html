@@ -6,13 +6,64 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>messages-page</ion-title>
-  </ion-navbar>
+  <ion-toolbar>
+    <button  ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Inbox</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-segment color="primary" [(ngModel)]="tabs">
+      <ion-segment-button value="notification">
+        Notificaciones
+      </ion-segment-button>
+      <ion-segment-button value="message">
+        Mensajes
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content no-padding >
 
+  <div *ngIf="tabs == 'notification'">
+    <ion-card no-padding style="margin: 0px; width: 100%">
+      <ion-list>
+        <ion-item>
+          <ion-avatar item-start>
+            <img [src]=avatars[0]>
+          </ion-avatar>
+          <h2>Samsensei</h2>
+          <p>Ha comentado en una de tus experiencias de viaje</p>
+        </ion-item>
+      </ion-list>
+      <ion-list>
+        <ion-item>
+          <ion-avatar item-start>
+            <img [src]=avatars[1]>
+          </ion-avatar>
+          <h2>Recomendación</h2>
+          <p>Restaurante ¡Que rico! está cerca de tí. No olvides visitarlo</p>
+        </ion-item>
+      </ion-list>
+
+    </ion-card>
+  </div>
+
+  <div *ngIf="tabs == 'message'">
+    <ion-card no-padding style="margin: 0px; width: 100%">
+      <ion-list>
+        <ion-item>
+          <ion-avatar item-start>
+            <img [src]=avatars[2]>
+          </ion-avatar>
+          <h2>Miriam</h2>
+          <p>Hola, me podrías ayudar con unas dudas con respecto a Santiago? </p>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  </div>
 </ion-content>

@@ -15,7 +15,8 @@ export class DataBitacorasCompartidas {
     sdate: new Date(2018,8,10),
     edate: new Date(2018,8,30),
     title: "Viaje con mis amigos en Santiago",
-
+    likes: 3,
+    comments: 5,
     entries:
     [
 

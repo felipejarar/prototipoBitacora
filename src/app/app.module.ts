@@ -18,8 +18,8 @@ import { BitacoraPersonalPage } from "../pages/bitacora-personal/bitacora-person
 import { NewPhotoExperiencePage } from  "../pages/new-photo-experience/new-photo-experience";
 import { NewVideoExperiencePage } from  "../pages/new-video-experience/new-video-experience";
 import { NewTextExperiencePage } from "../pages/new-text-experience/new-text-experience";
-
-
+import { PostDetailsPage } from "../pages/post-details/post-details";
+import { TourismDetailsPage } from "../pages/tourism-details/tourism-details";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -50,7 +50,9 @@ import { PlacesComponent } from '../components/places/places';
     TourismPage,
     NewPhotoExperiencePage,
     NewVideoExperiencePage,
-    NewTextExperiencePage
+    NewTextExperiencePage,
+    PostDetailsPage,
+    TourismDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -79,7 +81,9 @@ import { PlacesComponent } from '../components/places/places';
     TourismPage,
     NewPhotoExperiencePage,
     NewVideoExperiencePage,
-    NewTextExperiencePage
+    NewTextExperiencePage,
+    PostDetailsPage,
+    TourismDetailsPage
   ],
   providers: [
     StatusBar,

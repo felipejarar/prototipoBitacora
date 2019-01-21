@@ -4,15 +4,81 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header no-border >
 
-  <ion-navbar>
-    <ion-title>tourism-page</ion-title>
-  </ion-navbar>
+  <!-- First Toolbar -->
+  <ion-toolbar>
+    <button  ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-searchbar (submit) = "search()"></ion-searchbar>
+  </ion-toolbar>
 
+  <!-- Second toolbar -->
+  <ion-toolbar no-border class="scrollable-segments">
+      <ion-segment [(ngModel)]="segment">
+        <ion-segment-button value="all">
+            Todos
+        </ion-segment-button>
+          <ion-segment-button value="iconic">
+              Icónicos
+          </ion-segment-button>
+          <ion-segment-button value="test">
+              Alojamiento
+          </ion-segment-button>
+          <ion-segment-button value="test2">
+              Comida y bebida
+          </ion-segment-button>
+          <ion-segment-button value="test3">
+              Entretención
+          </ion-segment-button>
+          <ion-segment-button value="test4">
+              Cultura
+          </ion-segment-button>
+          <ion-segment-button value="test5">
+              Naturaleza
+          </ion-segment-button>
+          <ion-segment-button value="test6">
+              En familia
+          </ion-segment-button>
+      </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content no-padding>
+  <ion-card no-margin class="full-width-card transparent no-padding-top" >
+    <ion-card-content no-padding>
+      <button ion-button icon-start clear small  (click)="presentPlaceSheet()" class="transparent select-button">
+        <ion-icon  name="{{place_icon}}"></ion-icon>
+        <div >{{place_label}}</div>
+        <ion-icon name="md-arrow-dropdown"></ion-icon>
+      </button>
+    </ion-card-content>
+  </ion-card>
 
+  <div *ngFor = "let content of contents; let i = index">
+    <ion-card class="full-width-card" *ngIf="content && (content.place == place_label || place_label == 'Chile')">
+
+      <!-- Header -->
+      <ion-item *ngIf="content">
+        <ion-avatar item-start><img [src]="content.avatar"></ion-avatar>
+        <h2 name="username" (click)="contentClicked(content)">{{content.name}}</h2>
+        <p name="details" (click)="contentClicked(content)">{{content.place}} \u2022 {{content.type}}</p>
+        <ion-fab top right><button ion-fab mini class="transparent"><ion-icon name="ios-more"></ion-icon></button></ion-fab>
+      </ion-item>
+
+      <ion-card-content *ngIf="content.title"  class="header" (click)="contentClicked(content)">
+        <button ion-button outline small style="height: 15px; font-size: x-small; margin-top: 0px; top:-4px; margin-right: 5px;" color="dark">contenteriencia</button>{{content.title}}
+      </ion-card-content>
+
+      <img [src]="content.pic" style="margin-bottom: 15px"/>
+
+      <!--Cuerpo-->
+      <ion-card-content *ngIf="content.description" class="body" (click)="contentClicked(content)">
+        <span *ngIf="content.description.length <= body_limit">{{content.description}}</span><span *ngIf="content.description.length > body_limit">{{content.description.substring(0,body_limit)}}... <a style="margin-left:10px;">Ver más</a></span>
+      </ion-card-content>
+
+    </ion-card>
+  </div>
 </ion-content>

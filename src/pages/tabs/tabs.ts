@@ -4,6 +4,9 @@ import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
 import { ViewController, ModalController, NavParams } from 'ionic-angular';
 import { NewTabComponent } from '../../components/new-tab/new-tab';
+import { ForumsPage } from '../forums/forums';
+import { MessagesPage } from '../messages/messages';
+import { TourismPage } from '../tourism/tourism';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -11,8 +14,9 @@ import { NewTabComponent } from '../../components/new-tab/new-tab';
 export class TabsPage {
 
   tab1Root = HomePage;
-  tab2Root = AboutPage;
-  tab3Root = ContactPage;
+  tab2Root = TourismPage;
+  tab3Root = ForumsPage;
+  tab4Root = MessagesPage;
 
   constructor(public viewCtrl: ViewController, public modalCtrl: ModalController, params: NavParams ) {
 

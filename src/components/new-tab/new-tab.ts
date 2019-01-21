@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ViewController, NavParams } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { NewTextExperiencePage } from '../../pages/new-text-experience/new-text-experience';
-
+import { NewPhotoExperiencePage } from '../../pages/new-photo-experience/new-photo-experience';
 
 /**
  * Generated class for the NewTabComponent component.
@@ -33,6 +33,9 @@ export class NewTabComponent {
   changePage(page){
     if (page == "texto"){
       this.navCtrl.push(NewTextExperiencePage);
+    } else if (page == "foto"){
+      this.navCtrl.push(NewPhotoExperiencePage);
+
     }
   }
 

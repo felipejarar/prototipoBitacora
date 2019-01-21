@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { DataBitacorasPersonales } from '../../prototype_data/data_bitacoras_personales';
 import { ImageSliderViewerComponent } from '../../components/image-slider-viewer/image-slider-viewer';
+import { ActionSheetController, AlertController} from 'ionic-angular'
 
 /**
  * Generated class for the BitacoraPersonalPage page.
@@ -25,7 +26,9 @@ export class BitacoraPersonalPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
-    public data: DataBitacorasPersonales) {
+    public data: DataBitacorasPersonales,
+    public actionSheetCtrl:ActionSheetController,
+    private alertCtrl: AlertController) {
 
       var bitacora = navParams.get('data');
       this.entradas = bitacora.entries;
@@ -79,5 +82,28 @@ this.photoViewer.show('./assets/prototype/img2.png', 'My image title', {share: f
   goback(){
     this.navCtrl.pop();
   }
+
+
+backup_liked = "dark";
+backup_liked_count = 0;
+
+ likePostClicked(obj){
+   if (this.backup_liked == "primary"){
+     this.backup_liked = "dark";
+     this.backup_liked_count = this.backup_liked_count - 1;
+   }else{
+     this.backup_liked = "primary";
+     this.backup_liked_count = this.backup_liked_count + 1;
+   }
+ }
+
+ expClicked(){
+   let alert = this.alertCtrl.create({
+     title: 'Prototipo',
+     subTitle: 'Está función debería abrir los detalles de una experiencia de viaje (Comentarios de otros usuarios)',
+     buttons: ['Dismiss']
+   });
+   alert.present();
+ }
 
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, ModalController} from 'ionic-angular'
+import { ActionSheetController, ModalController, NavController, AlertController} from 'ionic-angular'
 import { PlacesComponent } from '../../components/places/places';
+import { TourismDetailsPage } from '../../pages/tourism-details/tourism-details';
 
 /**
  * Generated class for the ListadoBitacorasSocialesComponent component.
@@ -78,7 +79,18 @@ export class ListadoBitacorasSocialesComponent {
     place: "Santiago",
     booking: "loremipsum",
     body: "¿Necesitas un lugar donde dormir durante tus vacaciones? Hotel Castel te ofrece alojamiento de calidad a precios inigualables.",
-    pic: "assets/prototype/ads/ads1.png"
+    pic: "assets/prototype/ads/ads1.png",
+    data:{
+      name: "Hotel Castel",
+      business: "Hoteles",
+      place: "Santiago",
+  description: "Nuestro hotel de 4 estrellas en Santiago le ofrece todos los servicios necesarios para que su estancia sea una experiencia única.\n\nEl Hotel Castel ofrece a todos sus clientes conexión a internet wifi gratis, así como 2 Business Centers gratuitos con conexión a internet de Banda Ancha. Uno de ellos está ubicado en el mismo lobby del hotel y el otro en la novena planta, por si necesita trabajar en un ambiente más tranquilo.\n\nUno de los principales atractivos del Hotel\n\nCastel se encuentra en la 10ª planta, nuestra piscina rodeada por 2 estupendas terrazas que le ofrecen unas magníficas vistas de todo el Skyline de Santiago, pudiendo contemplar la panorámica de la zona de Montjuïc, Puerto de Santiago y toda la avenida Paralelo hasta Plaza España. También son espectaculares las vistas de la torre Agbar, Sagrada Familia, plaza Cataluña, o las torres del Port Olímpic y el monumento de Colón.\n\n Junto a la piscina se encuentra el solárium, donde podrá relajarse y broncearse un poco antes de ir a las playas de Santiago. La sala de fitness cardiovascular (con servicio gratuito de toallas y aguas) complementa perfectamente los alrededores del hotel, ideales para hacer un poco de footing en los Jardines de Montjuïc.\n\nLe informamos que el Hotel Castel es un hotel No Fumador",
+      phone: "+222857907",
+      mail: "hotelcastillo@gmail.com",
+      amenities: true,
+      pic: "assets/prototype/ads/ads1.png",
+      pics: [{src: "assets/prototype/hotel/castillo (1).jpg"}, {src : "assets/prototype/hotel/castillo (2).jpg"} , {src: "assets/prototype/hotel/castillo (3).jpg"}]
+    }
   },{
     id: 2,
     avatar: "assets/prototype/avatar/ads_2.png",
@@ -87,7 +99,18 @@ export class ListadoBitacorasSocialesComponent {
     place: "Santiago",
     body: "Ven a ¡Que Rico! y disfruta de la especialidad de la casa:",
     pic: "assets/prototype/ads/ads2.png",
-    web: "lorempsum"
+    web: "lorempsum",
+    data:{
+      name: "¡Que Rico!",
+      business: "Restaurantes",
+      place: "Santiago",
+      description: "En el ¡Que Rico! se encuentra un espacio dedicado a la cocina italiana, su nombre es Orvietto . Es ideal para los amantes de la elegancia y el confort, además la dulce vibración que emite el piano todas las noches, termina de complementar el encanto del lugar acompañado por sus platos fuertes como el Robalo a la Beatriz, Baby Beef, Fettucine con Pollo, Rissoto.\n\nNo podía faltar una amplia lista de vinos y licores, que junto a la decoración y ambiente del lugar, logran ser un lugar estratégico para cerrar negocios o disfrutar de una velada romántica.",
+      phone: "+222857907",
+      mail: "querico@gmail.com",
+      amenities: true,
+      pic: "assets/prototype/ads/ads2.png",
+      pics: [{src: "assets/prototype/restaurante/comida1.jpg"}, {src : "assets/prototype/restaurante/comida3.jpg"} , {src: "assets/prototype/hotel/restaurante/comida4.jpg"}],
+      }
   }];
 
   forums: any = [{
@@ -149,7 +172,9 @@ export class ListadoBitacorasSocialesComponent {
 
   constructor(
     public actionSheetCtrl:ActionSheetController,
-    public modalCtrl:ModalController ) {
+    public modalCtrl:ModalController,
+  private alertCtrl: AlertController,
+public navCtrl: NavController) {
       console.log(this.experience_posts);
   }
 
@@ -268,32 +293,62 @@ export class ListadoBitacorasSocialesComponent {
    }
 
    forumClicked(){
-     console.log("Go to forum");
+     let alert = this.alertCtrl.create({
+       title: 'Prototipo',
+       subTitle: 'Está función debería abrir los detalles de un foro de discusión.',
+       buttons: ['Dismiss']
+     });
+     alert.present();
    }
 
    forumPostClicked(){
-     console.log("Go to forum post");
+     let alert = this.alertCtrl.create({
+       title: 'Prototipo',
+       subTitle: 'Está función debería abrir los detalles de un hilo de discusión en un foro',
+       buttons: ['Dismiss']
+     });
+     alert.present();
    }
 
    forumOption(){
-     console.log("Show forum options");
-   }
+     let alert = this.alertCtrl.create({
+       title: 'Prototipo',
+       subTitle: 'Está función debería abrir opciones',
+       buttons: ['Dismiss']
+     });
+     alert.present();   }
 
    userClicked(username){
-     console.log("Show user " + username);
-   }
+     let alert = this.alertCtrl.create({
+       title: 'Prototipo',
+       subTitle: 'Está función debería abrir el perfil del usuario',
+       buttons: ['Dismiss']
+     });
+     alert.present();   }
 
    expClicked(experience){
-     console.log("Experiencie clicked");
-   }
+     let alert = this.alertCtrl.create({
+       title: 'Prototipo',
+       subTitle: 'Está función debería abrir los detalles de una experiencia de viaje registrada por otro usuario',
+       buttons: ['Dismiss']
+     });
+     alert.present();   }
 
    adReferenceClicked(ad){
-    console.log("Ad reference clicked");
+     let alert = this.alertCtrl.create({
+       title: 'Prototipo',
+       subTitle: 'Está función debería abrir la página web en el navegador nativo del dispositivo móvil',
+       buttons: ['Dismiss']
+     });
+     alert.present();
    }
 
    adClicked(ad){
-     console.log("Ad clicked");
+     console.log(ad);
+     this.navCtrl.push(TourismDetailsPage, { param: ad.data});
    }
+
+
 
    likePostClicked(obj){
      if (obj.liked == "primary"){
