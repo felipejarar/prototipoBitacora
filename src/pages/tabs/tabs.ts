@@ -13,10 +13,7 @@ import { TourismPage } from '../tourism/tourism';
 })
 export class TabsPage {
 
-  tab1Root = HomePage;
-  tab2Root = TourismPage;
-  tab3Root = ForumsPage;
-  tab4Root = MessagesPage;
+  tab1Root = TourismPage;
 
   constructor(public viewCtrl: ViewController, public modalCtrl: ModalController, params: NavParams ) {
 

@@ -14,32 +14,33 @@
     <ion-searchbar (submit) = "search()"></ion-searchbar>
   </ion-toolbar>
 
+
   <!-- Second toolbar -->
-  <ion-toolbar no-border class="scrollable-segments">
-      <ion-segment [(ngModel)]="segment">
-        <ion-segment-button value="all">
-            Todos
-        </ion-segment-button>
-          <ion-segment-button value="iconic">
-              Icónicos
+
+
+
+  <ion-toolbar no-border class="scrollable-segments" >
+      <ion-segment [(ngModel)]="segment" id="toolbar_scrollable" (ionScroll)="onScroll($event)">
+          <ion-segment-button value="iconic" (click)="changeTab('iconic')">
+            <ion-icon name="md-star"><label>Icónicos</label></ion-icon>
           </ion-segment-button>
-          <ion-segment-button value="test">
-              Alojamiento
+          <ion-segment-button value="lodging" (click)="changeTab('lodging')">
+            <ion-icon name="md-home"><label>Hospedaje</label></ion-icon>
           </ion-segment-button>
-          <ion-segment-button value="test2">
-              Comida y bebida
+          <ion-segment-button value="food" (click)="changeTab('food')">
+            <ion-icon name="pizza"><label>Comida</label></ion-icon>
           </ion-segment-button>
-          <ion-segment-button value="test3">
-              Entretención
+          <ion-segment-button value="entertainment" (click)="changeTab('entertainment')">
+            <ion-icon name="ios-happy"><label>Esparcimiento</label></ion-icon>
           </ion-segment-button>
-          <ion-segment-button value="test4">
-              Cultura
+          <ion-segment-button value="culture" (click)="changeTab('culture')">
+            <ion-icon name="planet"><label>Cultura</label></ion-icon>
           </ion-segment-button>
-          <ion-segment-button value="test5">
-              Naturaleza
+          <ion-segment-button value="nature" (click)="changeTab('nature')">
+            <ion-icon name="leaf"><label>Naturaleza</label></ion-icon>
           </ion-segment-button>
-          <ion-segment-button value="test6">
-              En familia
+          <ion-segment-button value="family" (click)="changeTab('family')">
+            <ion-icon name="contacts"><label>En familia</label></ion-icon>
           </ion-segment-button>
       </ion-segment>
   </ion-toolbar>
@@ -47,38 +48,70 @@
 
 
 <ion-content no-padding>
-  <ion-card no-margin class="full-width-card transparent no-padding-top" >
-    <ion-card-content no-padding>
-      <button ion-button icon-start clear small  (click)="presentPlaceSheet()" class="transparent select-button">
-        <ion-icon  name="{{place_icon}}"></ion-icon>
-        <div >{{place_label}}</div>
-        <ion-icon name="md-arrow-dropdown"></ion-icon>
-      </button>
-    </ion-card-content>
-  </ion-card>
+  <div (swipe)="swipeEvent($event)" style="min-height: 100%">
 
-  <div *ngFor = "let content of contents; let i = index">
-    <ion-card class="full-width-card" *ngIf="content && (content.place == place_label || place_label == 'Chile')">
+    <ion-card no-margin class="full-width-card transparent no-padding-top" >
 
-      <!-- Header -->
-      <ion-item *ngIf="content">
-        <ion-avatar item-start><img [src]="content.avatar"></ion-avatar>
-        <h2 name="username" (click)="contentClicked(content)">{{content.name}}</h2>
-        <p name="details" (click)="contentClicked(content)">{{content.place}} \u2022 {{content.type}}</p>
-        <ion-fab top right><button ion-fab mini class="transparent"><ion-icon name="ios-more"></ion-icon></button></ion-fab>
-      </ion-item>
+      <ion-card-content no-padding>
 
-      <ion-card-content *ngIf="content.title"  class="header" (click)="contentClicked(content)">
-        <button ion-button outline small style="height: 15px; font-size: x-small; margin-top: 0px; top:-4px; margin-right: 5px;" color="dark">contenteriencia</button>{{content.title}}
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-start clear small  (click)="presentPlaceSheet()" class="transparent select-button">
+              <ion-icon  name="{{place_icon}}"></ion-icon>
+              <div >{{place_label}}</div>
+              <ion-icon name="md-arrow-dropdown"></ion-icon>
+            </button>
+          </ion-col>
+
+          <ion-col>
+            <button ion-button icon-start clear small (click)="presentDisplaySheet()" class="transparent select-button" style="float: right">
+              <ion-icon *ngIf="!multimedia_mode" name="apps"></ion-icon>
+              <ion-icon *ngIf="multimedia_mode" name="square-outline"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+
+
       </ion-card-content>
-
-      <img [src]="content.pic" style="margin-bottom: 15px"/>
-
-      <!--Cuerpo-->
-      <ion-card-content *ngIf="content.description" class="body" (click)="contentClicked(content)">
-        <span *ngIf="content.description.length <= body_limit">{{content.description}}</span><span *ngIf="content.description.length > body_limit">{{content.description.substring(0,body_limit)}}... <a style="margin-left:10px;">Ver más</a></span>
-      </ion-card-content>
-
     </ion-card>
+
+    <div name="content">
+      <div *ngIf="!multimedia_mode">
+        <div *ngFor = "let content of contents; let i = index" >
+          <ion-card class="full-width-card" *ngIf="content && (content.place == place_label || place_label == 'Chile' ) && (content.class && content.class.includes(segment)) ">
+
+            <!-- Header -->
+            <ion-item *ngIf="content">
+              <ion-avatar item-start><img [src]="content.avatar"></ion-avatar>
+              <h2 name="username" (click)="contentClicked(content)">{{content.name}}</h2>
+              <p name="details" (click)="contentClicked(content)">{{content.place}} \u2022 {{content.type}}</p>
+              <ion-fab top right><button ion-fab mini class="transparent"><ion-icon name="ios-more"></ion-icon></button></ion-fab>
+            </ion-item>
+
+            <ion-card-content *ngIf="content.title"  class="header" (click)="contentClicked(content)">
+              <button ion-button outline small style="height: 15px; font-size: x-small; margin-top: 0px; top:-4px; margin-right: 5px;" color="dark">contenteriencia</button>{{content.title}}
+            </ion-card-content>
+
+            <img [src]="content.pic" style="margin-bottom: 15px"/>
+
+            <!--Cuerpo-->
+            <ion-card-content *ngIf="content.description" class="body" (click)="contentClicked(content)">
+              <span *ngIf="content.description.length <= body_limit">{{content.description}}</span><span *ngIf="content.description.length > body_limit">{{content.description.substring(0,body_limit)}}... <a style="margin-left:10px;">Ver más</a></span>
+            </ion-card-content>
+
+          </ion-card>
+        </div>
+      </div>
+
+        <div *ngIf="multimedia_mode" class="grid">
+          <div *ngFor = "let picture of pics_contents; let i = index" style="height: 100%">
+            <div (click)="contentClicked(picture.content)" style="--aspect-ratio: 2/1;" class="fill" *ngIf="picture && picture.pic && (picture.place == place_label || place_label == 'Chile' ) && (picture.class && picture.class.includes(segment)) ">
+                <img [src]=picture.pic style="height 100%"/>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
+
+
 </ion-content>

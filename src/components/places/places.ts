@@ -27,11 +27,11 @@ export class PlacesComponent {
   constructor(
     public viewCtrl: ViewController,
     public navCtrl: NavController) {
-    console.log('Hello PlacesComponent Component');
+
   }
 
   dismiss(){
-    this.viewCtrl.dismiss(this.selected_place);
+    this.viewCtrl.dismiss();
   }
 
   count:any = 0;
@@ -40,7 +40,6 @@ export class PlacesComponent {
       this.count ++
     }else{
       this.viewCtrl.dismiss(this.selected_place);
-
     }
   }
 

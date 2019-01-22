@@ -1,14 +1,43 @@
 page-tourism {
-  ion-toolbar.scrollable-segments {
-  	ion-segment {
-  	  display: block;
-  	  overflow-x: scroll;
-  	  white-space: nowrap;
 
-  	  ion-segment-button.segment-button {
-  		display: inline-block;
-  		width: auto;
-  	  }
-  	}
+    ::-webkit-scrollbar {
+      width: 0px;  /* remove scrollbar space */
+      background: transparent;  /* optional: just make scrollbar invisible */
+      height: 0px;
   }
+
+
+
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: start;
+    grid-gap: 5px;
+  }
+  .grid > * {
+    background: orange;
+    width: 100%;
+  }
+  .grid > [style^='--aspect-ratio']::before {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 0;
+    padding-bottom: calc(100% / (var(--aspect-ratio)));
+  }
+
+  .fill{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 100%;
+    img{
+      flex-shrink: 0;
+      min-width: 100%;
+      min-height: 100%
+    }
+  }
+
 }

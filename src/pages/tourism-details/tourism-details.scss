@@ -1,3 +1,28 @@
 page-tourism-details {
+  img{
+    width: 100%;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+    height: 0px;
+}
+
+  ion-item-group.packed{
+    button{
+      ion-note{
+        margin-right: 20px;
+      }
+      ion-icon{
+        margin-right: 0px;
+      }
+
+      ion-note{
+        color: black;
+        max-width: 70%;
+      }
+    }
+  }
 
 }

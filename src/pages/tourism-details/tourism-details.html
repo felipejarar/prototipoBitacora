@@ -9,126 +9,178 @@
 
   <ion-navbar>
     <ion-title *ngIf="data.name">{{data.name}}</ion-title>
-
-
     <ion-buttons end>
       <button ion-button icon-only (click)="heartclicked()">
-        <ion-icon name="ios-heart-outline" style="padding-right: 15x" *ngIf="!faved" ></ion-icon>
+        <ion-icon name="ios-heart-outline" style="padding-right: 15px" *ngIf="!faved" ></ion-icon>
         <ion-icon name="ios-heart" style="padding-right: 15x" *ngIf="faved"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 
-  <ion-toolbar no-border-top>
-    <ion-segment [(ngModel)]="apps">
-      <ion-segment-button value="general">
-        General
-      </ion-segment-button>
-      <ion-segment-button value="photos">
-        Fotografías
-      </ion-segment-button>
-      <ion-segment-button value="reviews">
-        Reseñas
-      </ion-segment-button>
-    </ion-segment>
+  <ion-toolbar no-border class="scrollable-segments" >
+      <ion-segment [(ngModel)]="segment" id="toolbar_scrollable2" (ionScroll)="onScroll($event)">
+          <ion-segment-button value="general" (click)="changeTab('general')">
+            <ion-icon name="md-star"><label>General</label></ion-icon>
+          </ion-segment-button>
+          <ion-segment-button value="address" (click)="changeTab('address')">
+            <ion-icon name="ios-map"><label>Dirección</label></ion-icon>
+          </ion-segment-button>
+          <ion-segment-button value="contact" (click)="changeTab('contact')">
+            <ion-icon name="ios-contacts"><label>Contacto</label></ion-icon>
+          </ion-segment-button>
+          <ion-segment-button value="photos" (click)="changeTab('photos')">
+            <ion-icon name="md-home"><label>Fotos</label></ion-icon>
+          </ion-segment-button>
+          <ion-segment-button value="services" (click)="changeTab('services')" *ngIf="data.services">
+            <ion-icon name="pizza"><label>Servicios</label></ion-icon>
+          </ion-segment-button>
+          <ion-segment-button value="rates" (click)="changeTab('rates')" *ngIf="data.rates">
+            <ion-icon name="ios-happy"><label>Tarifas</label></ion-icon>
+          </ion-segment-button>
+          <ion-segment-button value="feedback" (click)="changeTab('feedback')" *ngIf="data.feedback">
+            <ion-icon name="planet"><label>Reseñas</label></ion-icon>
+          </ion-segment-button>
+      </ion-segment>
   </ion-toolbar>
-
 
 </ion-header>
 
 
-<ion-content no-padding>
+<ion-content (ionScroll)="onScroll($event)" no-padding id="content">
 
+  <div (swipe)="swipeEvent($event)" style="min-height: 100%">
 
+    <!-- General -->
+    <div id="general">
+      <img *ngIf="data.pic" [src]=data.pic />
+      <ion-card *ngIf="data.description" class="full-width-card">
+        <ion-card-content>
+          <p *ngIf="data.description.length <= limit_description || show_more_description" class="text-content">
+            {{data.description}}
+          </p>
+          <p *ngIf="data.description.length > limit_description && !show_more_description" class="text-content">
+            {{data.description.substring(0,limit_description)}}... <br> <a style="display: block; text-align: center" (click)="toggleDescription()">(Ver más)</a>
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </div>
 
+    <!-- Dirección -->
+    <div id="address">
+      <ion-card *ngIf="data.address" class="full-width-card">
+        <ion-card-content>
+          <label style="display: block; text-align: center; margin-bottom: 15px;">
+            <ion-icon name='ios-map' style="margin-right: 15px;"></ion-icon>
+            <b>Dirección</b>
+          </label>
+          <p class="text-content">{{data.address}}</p>
+        </ion-card-content>
+        <img *ngIf="map_placeholder" [src]=map_placeholder style="width: 100%"/>
+      </ion-card>
+    </div>
 
-  <img *ngIf="data.pic" [src]=data.pic />
+    <!-- Contactos -->
+    <div id="contact">
+      <ion-card *ngIf="data.address" class="full-width-card">
+        <ion-card-content>
+          <label style="display: block; text-align: center; margin-bottom: 15px;">
+            <ion-icon name='ios-contacts' style="margin-right: 15px;"></ion-icon>
+            <b>Contacto</b>
+          </label>
+        </ion-card-content>
 
-  <ion-list>
+      <ion-list>
+        <ion-item-group class="packed">
 
-    <ion-item-group>
+          <button *ngIf="data.phone" ion-item (click)="addContact();" >
+            <ion-icon name="call" item-start color="dark"></ion-icon>
+            <ion-label>Teléfono</ion-label>
+            <ion-note item-end>{{data.phone}}</ion-note>
+            <ion-icon name="arrow-dropright" item-end color="dark"></ion-icon>
+          </button>
 
-      <button ion-item (click)="showSchedules();">
-        <ion-icon name="time" item-start color="dark"></ion-icon>
-        <ion-note>08:00 - 21:00hrs</ion-note>
-      </button>
+          <button *ngIf="data.mail" ion-item (click)="addContact();">
+            <ion-icon name="mail" item-start color="dark"></ion-icon>
+            <ion-label >Correo</ion-label>
+            <ion-note item-end>{{data.mail}}</ion-note>
+            <ion-icon name="arrow-dropright" item-end color="dark"></ion-icon>
+          </button>
 
-      <button *ngIf="data.phone" ion-item (click)="addContact();">
-        <ion-icon name="call" item-start color="dark"></ion-icon>
-        <ion-label>Telefono</ion-label>
-        <ion-note item-end style="padding-right: 20px;">{{data.phone}}</ion-note>
-        <ion-icon name="arrow-dropright" item-end color="dark"></ion-icon>
-      </button>
+          <button ion-item (click)="showSchedules($event);">
+            <ion-icon name="time" item-start color="dark"></ion-icon>
+            <ion-label>Horarios</ion-label>
+            <ion-note item-end>08:00 - 21:00hrs</ion-note>
+            <ion-icon *ngIf="!schedules_expand && data.schedules" name="md-arrow-dropdown" item-end color="dark"></ion-icon>
+            <ion-icon *ngIf="schedules_expand" name="md-arrow-dropup" item-end color="dark"></ion-icon>
+          </button>
+          <div *ngIf="schedules_expand && data.schedules">
+            <ion-item *ngIf="data.schedules.monday"> Lunes <ion-note item-end style="margin-right: 15px">{{data.schedules.monday}}</ion-note> </ion-item>
+            <ion-item *ngIf="data.schedules.tuesday"> Martes <ion-note item-end style="margin-right: 15px">{{data.schedules.tuesday}}</ion-note></ion-item>
+            <ion-item *ngIf="data.schedules.wednesday"> Miercoles <ion-note item-end style="margin-right: 15px">{{data.schedules.wednesday}}</ion-note></ion-item>
+            <ion-item *ngIf="data.schedules.thursday"> Jueves <ion-note item-end style="margin-right: 15px">{{data.schedules.thursday}}</ion-note></ion-item>
+            <ion-item *ngIf="data.schedules.friday"> Viernes <ion-note item-end style="margin-right: 15px">{{data.schedules.friday}}</ion-note></ion-item>
+            <ion-item *ngIf="data.schedules.saturday"> Sabado <ion-note item-end style="margin-right: 15px">{{data.schedules.saturday}}</ion-note></ion-item>
+            <ion-item *ngIf="data.schedules.sunday"> Domingo <ion-note item-end style="margin-right: 15px">{{data.schedules.sunday}}</ion-note></ion-item>
+          </div>
 
-      <button *ngIf="data.mail" ion-item (click)="addContact();">
-        <ion-icon name="mail" item-start color="dark"></ion-icon>
-        <ion-label >Correo</ion-label>
-        <ion-icon name="arrow-dropright" item-end color="dark"></ion-icon>
-      </button>
+          <button *ngIf="data.site" ion-item (click)="goSite();">
+            <ion-icon name="globe" item-start color="dark"></ion-icon>
+            <ion-label>Página web</ion-label>
+            <ion-icon name="arrow-dropright" item-end color="dark"></ion-icon>
+          </button>
 
-      <button *ngIf="data.web" ion-item (click)="goSite();">
-        <ion-icon name="globe" item-start color="dark"></ion-icon>
-        <ion-label>Página web</ion-label>
-        <ion-icon name="arrow-dropright" item-end color="dark"></ion-icon>
-      </button>
+        </ion-item-group>
+        </ion-list>
+      </ion-card>
+    </div>
 
-      <button *ngIf="data.booking" ion-item (click)="goBooking();">
-        <ion-icon name="link" item-start color="dark"></ion-icon>
-        <ion-label>Booking</ion-label>
-        <ion-icon name="arrow-dropright" item-end color="dark"></ion-icon>
-      </button>
+    <!-- Fotos -->
+    <ion-card  id="photos" class="full-width-card">
+      <ion-card-content  *ngIf="data.pics != null" class="multimedia"  name="picture-grids">
 
-    </ion-item-group>
+          <label style="display: block; text-align: center; margin-bottom: 15px;">
+            <ion-icon name='images' style="margin-right: 15px;"></ion-icon>
+            <b>Fotos</b>
+          </label>
 
-    <img *ngIf="map_placeholder" [src]=map_placeholder style="width: 100%"/>
+          <div *ngIf="data.pics.length == 1">
+            <img [src]="data.pics[0].src" (click)=openModal(data.pics,0) />
+          </div>
 
-  </ion-list>
+          <div *ngIf="data.pics.length == 2" class="grid-image-two">
+            <div class="grid-image"><img [src]="data.pics[0].src"  (click)=openModal(data.pics,0) /></div>
+            <div class="grid-image"><img [src]="data.pics[1].src"   (click)=openModal(data.pics,1) /></div>
+          </div>
 
-  <ion-card no-margin style="width: 100%">
-    <ion-card-content>
-        <p *ngIf="data.description" [innerHTML]="data.description" style="white-space: pre-wrap; text-align: justify;"></p>
-      </ion-card-content>
-    </ion-card>
+          <div *ngIf="data.pics.length == 3"  class="grid-image-three">
+            <div class="grid-image"><img [src]="data.pics[0].src" (click)=openModal(data.pics,0)/></div>
+            <div class="grid-image"><img [src]="data.pics[1].src" (click)=openModal(data.pics,1)/></div>
+            <div class="grid-image"><img [src]="data.pics[2].src" (click)=openModal(data.pics,2)/></div>
+          </div>
 
+          <div *ngIf="data.pics.length == 4" class="grid-image-four-or-more">
+              <div class="grid-image"><img [src]="data.pics[0].src" (click)=openModal(data.pics,0)/></div>
+              <div class="grid-image"><img [src]="data.pics[1].src" (click)=openModal(data.pics,1)/></div>
+              <div class="grid-image"><img [src]="data.pics[2].src" (click)=openModal(data.pics,2)/></div>
+              <div class="grid-image"><img [src]="data.pics[3].src" (click)=openModal(data.pics,3)/></div>
+          </div>
 
-    <ion-card-content no-padding class="multimedia" *ngIf="data.pics != null" name="picture-grids">
-
-      <div *ngIf="data.pics.length == 1">
-        <img [src]="data.pics[0].src" (click)=openModal(data.pics,0) />
-      </div>
-
-      <div *ngIf="data.pics.length == 2" class="grid-image-two">
-        <div class="grid-image"><img [src]="data.pics[0].src"  (click)=openModal(data.pics,0) /></div>
-        <div class="grid-image"><img [src]="data.pics[1].src"   (click)=openModal(data.pics,1) /></div>
-      </div>
-
-      <div *ngIf="data.pics.length == 3"  class="grid-image-three">
-        <div class="grid-image"><img [src]="data.pics[0].src" (click)=openModal(data.pics,0)/></div>
-        <div class="grid-image"><img [src]="data.pics[1].src" (click)=openModal(data.pics,1)/></div>
-        <div class="grid-image"><img [src]="data.pics[2].src" (click)=openModal(data.pics,2)/></div>
-      </div>
-
-      <div *ngIf="data.pics.length == 4" class="grid-image-four-or-more">
-          <div class="grid-image"><img [src]="data.pics[0].src" (click)=openModal(data.pics,0)/></div>
-          <div class="grid-image"><img [src]="data.pics[1].src" (click)=openModal(data.pics,1)/></div>
-          <div class="grid-image"><img [src]="data.pics[2].src" (click)=openModal(data.pics,2)/></div>
-          <div class="grid-image"><img [src]="data.pics[3].src" (click)=openModal(data.pics,3)/></div>
-      </div>
-
-      <div *ngIf="data.pics.length > 4">
-        <div class="grid-image-four-or-more">
-          <div class="grid-image"><img [src]="data.pics[0].src" (click)=openModal(data.pics,0)/></div>
-          <div class="grid-image"><img [src]="data.pics[1].src" (click)=openModal(data.pics,1)/></div>
-          <div class="grid-image"><img [src]="data.pics[2].src" (click)=openModal(data.pics,2)/></div>
-          <div class="grid-image" style="text-align: center; position: relative;">
-            <img [src]="data.pics[3].src" (click)=openModal(data.pics,3)/>
-            <div style="position:absolute; width: 100%; height: 100%; top: 0; background-color: black; opacity: 0.75;"></div>
-            <div style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%)">
-              <h1 style="color: white;"><ion-icon style="padding-right: 5px" name="md-add"></ion-icon> {{ data.pics.length - 3 }}</h1>
+          <div *ngIf="data.pics.length > 4">
+            <div class="grid-image-four-or-more">
+              <div class="grid-image"><img [src]="data.pics[0].src" (click)=openModal(data.pics,0)/></div>
+              <div class="grid-image"><img [src]="data.pics[1].src" (click)=openModal(data.pics,1)/></div>
+              <div class="grid-image"><img [src]="data.pics[2].src" (click)=openModal(data.pics,2)/></div>
+              <div class="grid-image" style="text-align: center; position: relative;">
+                <img [src]="data.pics[3].src" (click)=openModal(data.pics,3)/>
+                <div style="position:absolute; width: 100%; height: 100%; top: 0; background-color: black; opacity: 0.75;"></div>
+                <div style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%)">
+                  <h1 style="color: white;"><ion-icon style="padding-right: 5px" name="md-add"></ion-icon> {{ data.pics.length - 3 }}</h1>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </ion-card-content>
+        </ion-card-content>
+      </ion-card>
+    </div>
 
 </ion-content>
